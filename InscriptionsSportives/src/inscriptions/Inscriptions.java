@@ -257,11 +257,11 @@ public class Inscriptions implements Serializable
 		//System.out.println("Date cloture: "+flechettes.getDateCloture());
 		//System.out.println("Date Systeme: "+LocalDate.now());
 		//System.out.println(inscriptions);
-		flechettes.setDateCloture(LocalDate.of(2020,12, 12));
-		System.out.println("Candidat déjà inscris:"+flechettes.getCandidats());
-		System.out.println("Candidat à inscrire:"+flechettes.getCandidatsAInscrire());
+		//flechettes.setDateCloture(LocalDate.of(2020,12, 12));
+		//System.out.println("Candidat déjà inscris:"+flechettes.getCandidats());
+		//System.out.println("Candidat à inscrire:"+flechettes.getCandidatsAInscrire());
 		
-		System.out.println(flechettes.getDateCloture());
+	//	System.out.println(flechettes.getDateCloture());
 			lesManouches.delete();
 		//	System.out.println(inscriptions);
 			try
