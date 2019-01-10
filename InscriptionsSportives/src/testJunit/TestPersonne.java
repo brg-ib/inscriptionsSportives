@@ -1,4 +1,4 @@
-package TestJunit;
+package testJunit;
 
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertTrue;
@@ -37,21 +37,5 @@ public class TestPersonne {
 
 	
 	}
-	
-	@Test
-	public void testSetPrenom() {
-
-	}
-	
-	@Test
-	public void testSetNom() {
-	
-	}
-	
-	@Test
-	public void testSetMail() {
-	
-	}
-	
 	
 }
