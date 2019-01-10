@@ -30,6 +30,11 @@ public class InscriptionsTest {
 	assertEquals("Boon", Brahim.getNom());
 	assertEquals("Auguste", Ihcen.getNom());
 	
+	Brahim.setMail("danyboon@gmail.com");
+	Ihcen.setMail("philippeauguste@me.com");
+	assertEquals("danyboon@gmail.com", Brahim.getMail());
+	assertEquals("philippeauguste@me.com", Ihcen.getMail());
+
 	
 	}
 	
