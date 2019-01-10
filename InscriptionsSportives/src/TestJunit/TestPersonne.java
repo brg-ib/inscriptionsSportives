@@ -8,7 +8,7 @@ import org.junit.Test;
 import inscriptions.Inscriptions;
 import inscriptions.Personne;
 
-public class InscriptionsTest {
+public class TestPersonne {
 	
 	@Test
 	public void setUp() throws Exception {
