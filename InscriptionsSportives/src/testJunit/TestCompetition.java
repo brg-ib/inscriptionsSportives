@@ -2,8 +2,7 @@ package testJunit;
 
 import org.junit.Test;
 
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertTrue;
+import static org.junit.Assert.*;
 
 import java.time.LocalDate;
 
@@ -31,10 +30,24 @@ public class TestCompetition {
 	Equipe e1 = inscr.createEquipe("Gangs");
 	Equipe e2 = inscr.createEquipe("Bulls");
 	
+	// Edite et test le nom d'une competition
+	c2.setNom("Boxe");
 	assertEquals("Poker", c1.getNom());
-	assertEquals("Billard", c2.getNom());
+	assertEquals("Boxe", c2.getNom());
+	// Edite et test la dateCloture
+	c1.setDateCloture(LocalDate.of(2033, 04, 29));
+	assertEquals(LocalDate.of(2033, 04, 29),c1.getDateCloture());
+	// Test inscriptionsOuvertes
 	assertTrue(c1.inscriptionsOuvertes());
-	assertTrue(c2.inscriptionsOuvertes());
+	assertFalse(c2.inscriptionsOuvertes());
+	// Test addPersonne et removePersonne
+	c1.add(p1);
+	assertTrue(c1.getCandidats().contains(p1));
+	c1.remove(p1);
+	assertFalse(c1.getCandidats().contains(p1));
+	// Test estEnEquipe
+	assertTrue(c2.estEnEquipe());
+	assertFalse(c1.estEnEquipe());
 	
 	}
 }
