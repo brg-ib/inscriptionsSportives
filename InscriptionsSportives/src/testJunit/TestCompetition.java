@@ -29,21 +29,13 @@ public class TestCompetition {
 		p2 = inscr.createPersonne("Marlon","Brando","marlon.brando@thgodfhater.com");
 		e1 = inscr.createEquipe("Gangs");
 		e2 = inscr.createEquipe("Bulls");
-				
-		// Edite et test la dateCloture
-		c1.setDateCloture(LocalDate.of(2033, 04, 29));
-		assertEquals(LocalDate.of(2033, 04, 29),c1.getDateCloture());
-		// Test inscriptionsOuvertes
-		assertTrue(c1.inscriptionsOuvertes());
-		assertFalse(c2.inscriptionsOuvertes());
 		// Test addPersonne et removePersonne
 		c1.add(p1);
 		assertTrue(c1.getCandidats().contains(p1));
 		c1.remove(p1);
 		assertFalse(c1.getCandidats().contains(p1));
 		// Test estEnEquipe
-		assertTrue(c2.estEnEquipe());
-		assertFalse(c1.estEnEquipe());
+
 	
 	}
 
@@ -51,24 +43,32 @@ public class TestCompetition {
 	public void testSetNom() {
 		c2.setNom("Boxe");
 		assertEquals("Boxe", c2.getNom());
-		assertEquals("Poker", c1.getNom());
 	}
 
-	@Ignore
 	@Test
-	public void test2() {
-		
+	public void testGetNom() {
+		assertEquals("Billard", c2.getNom());
 	}
 	
-	@Ignore
 	@Test
-	public void test3() {
-		
+	public void testEstEnEquipe() {
+		assertTrue(c2.estEnEquipe());
+		assertFalse(c1.estEnEquipe());	
 	}
 	
-	@Ignore
 	@Test
-	public void test4() {
-		
+	public void testGetDateCloture() {
+		assertEquals(datecloture2,c2.getDateCloture());
+	}
+	
+	@Test
+	public void testSetDateCloture() {
+		c2.setDateCloture(LocalDate.of(2021, 11, 11));
+		assertEquals(datecloture,c2.getDateCloture());
+	}
+	
+	@Test
+	public void testInscriptionsOuvertes(){
+		assertTrue(c1.inscriptionsOuvertes() && !c2.inscriptionsOuvertes());
 	}
 }
