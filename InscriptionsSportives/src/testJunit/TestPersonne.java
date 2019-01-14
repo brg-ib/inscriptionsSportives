@@ -1,8 +1,6 @@
 package testJunit;
 
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertTrue;
-import static org.junit.Assert.assertFalse;
+import static org.junit.Assert.*;
 
 import java.util.*;
 
@@ -59,14 +57,14 @@ public class TestPersonne {
 	@Test
 	public void testGetEquipe() {
 		Equipe equipe1 = inscr.createEquipe("Equipe de Poker");
-		equipe1.add(personne);
+		assertTrue(equipe1.add(personne));
 		Set<Equipe> setEquipe1 = personne.getEquipes();
 		assertTrue(setEquipe1.contains(equipe1));
 	}
 	@Test
 	public void testGetPersonneEquipe() {
 		Equipe equipe1 = inscr.createEquipe("Equipe de Poker");
-		equipe1.add(personne);
+		assertTrue(equipe1.add(personne));
 		Set<Equipe> setEquipe1 = personne.getEquipes();
 		personne.delete();
 		assertFalse(setEquipe1.contains(equipe1));
