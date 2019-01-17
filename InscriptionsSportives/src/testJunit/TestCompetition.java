@@ -21,22 +21,13 @@ public class TestCompetition {
 	private LocalDate datecloture2 = LocalDate.of(2018, 04, 29);
 	
 	@Before
-	public void setUp() throws Exception {		
-		
+	public void setUp() throws Exception {				
 		c1 = inscr.createCompetition("Poker", datecloture, false);
 		c2 = inscr.createCompetition("Billard", datecloture2, true);
 		p1 = inscr.createPersonne("Robert","DeNiro","deniro.Robert@youtalkingtome.com");
 		p2 = inscr.createPersonne("Marlon","Brando","marlon.brando@thgodfhater.com");
 		e1 = inscr.createEquipe("Gangs");
 		e2 = inscr.createEquipe("Bulls");
-		// Test addPersonne et removePersonne
-		c1.add(p1);
-		assertTrue(c1.getCandidats().contains(p1));
-		c1.remove(p1);
-		assertFalse(c1.getCandidats().contains(p1));
-		// Test estEnEquipe
-
-	
 	}
 
 	@Test
@@ -71,4 +62,23 @@ public class TestCompetition {
 	public void testInscriptionsOuvertes(){
 		assertTrue(c1.inscriptionsOuvertes() && !c2.inscriptionsOuvertes());
 	}
+	
+	@Test
+	public void TestAddPersonne() {
+		assertTrue(c1.add(p1));
+		assertTrue(c1.getCandidats().contains(p1));
+	}
+	
+	@Test
+	public void TestAddEquipe() {
+		assertFalse(c1.getCandidats().contains(e2));
+	}
+	
+	@Test
+	public void TestRemoveCandidat() {
+		assertTrue(c1.add(p1));
+		assertTrue(c1.remove(p1));
+		assertFalse(c1.getCandidats().contains(p1));
+	}
+	
 }
