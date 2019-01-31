@@ -1,182 +1,168 @@
 package menuUser;
 
 import java.util.*;
-
-import inscriptions.*;
-import commandLineMenus.Action;
-import commandLineMenus.Menu;
-import commandLineMenus.Option;
-import commandLineMenus.rendering.examples.util.InOut;
-
-
-import java.time.LocalDate;
 import java.util.ArrayList;
 
-import entity.Candidat;
-import entity.Competition;
-import entity.Equipe;
-import entity.Personne;
+import inscriptions.*;
+
+import commandLineMenus.*;
+import commandLineMenus.examples.ListOptions;
+import commandLineMenus.rendering.examples.util.InOut;
 
 public class MainUser {
 
-
+	
 	// Menu principal
 	 private static Menu getMainMenu(){
 		Menu menu = new Menu("Inscriptions Sportives");
-		menu.add(menuInscriptions());
-		menu.add(menuCandidats());
-		menu.add(menuCompetitions());
+//		menu.add(getmenuInscriptions());
+		menu.add(getmenuCandidats());
+//		menu.add(getmenuCompetitions());
+//		menu.add(getmenuPersonne());
+//		menu.add(getmenuExit());
 		menu.addQuit("q");
 		return menu;
 	}
 
-	private Menu menuExit(){
-		Menu quitter = new Menu("Quitter", "q");
-		quitter.addQuit("q");
-		return quitter;
-	}
+
+
+
 	
+//	DINA
+	 
 	
-	// Menu Inscriptions
-<<<<<<< HEAD
-	private static Menu getmenuInscriptions() {
-		
-		Menu menu = new Menu("MenuInscriptions","Inscriptions", "i");
-		// TODO 
-		menu.add(createEquipeOption());
-        menu.add(deleteCompetitionOption());
-        menu.add(deleteCandidatOption());        
-		menu.add(addEquipeOption());
-        menu.add(displayEquipeOption());
-        menu.add(modifyEquipeOption());
-        menu.addBack("B");
-		menu.setAutoBack(true);
-=======
-	private static Menu menuInscriptions() {
-		Menu menu = new Menu("Inscriptions", "i");
+	// Menu Candidats
+	private static Menu getmenuCandidats() {
+		Menu menu = new Menu("Candidats", "Candidat", "C");
 		// TODO
-		
->>>>>>> parent of 12b54c8... menu du Candidat
+		menu.add(getCandidatsOption());
+		menu.add(getCandidatsOption1());
+		menu.add(getCandidatsOption2());
+		menu.add(getCandidatsOption3());
+		menu.addBack("B");
+		menu.setAutoBack(true);
 		return menu;
-
-        
 	}
-<<<<<<< HEAD
 	
-static Option createEquipeOption() {
-		
-		return new Option("createPersonne", "C", createPersonne());
+	static Option getCandidatsOption()
+	{
+		return new Option("Nom", "N", getCandidatsNom());
 
 	}
 	
-	
-	static Option createEquipeOption() {
-		
-		return new Option("addEquipe", "A", createEquipe());
+	static Option getCandidatsOption1()
+	{
+
+		return new Option("Delete", "D", CandidatsDelete());
 
 	}
 	
+	static Option getCandidatsOption2()
+	{
+
+		return new Option("Modifier le Nom", "MN", setCandidatsNom());
+	}
 	
-	static Option deleteCompetitionOption() {
-		
-		return new Option("deleteEquipe", "D", InscriptionsDetele(Competition));
+	static Option getCandidatsOption3()
+	{
+
+		return new Option("Comp�titions", "C", getCandidatsCompetitions());
 
 	}
 	
-	static Option deleteCandidatOption() {
-		
-		return new Option("addEquipe", "d", InscriptionsDelete(Candidat));
+	static ArrayList<String> al = new ArrayList<String>();
 
+	
+	static Action getCandidatsNom()
+	{
+		return new Action()
+		{
+			public void optionSelected()
+			{
+//				System.out.println("Marcel");
+				al.add("Ginette");
+				
+			      System.out.println("Nom du candidat : " + al);
+			    
+			}
+		};
 	}
-	static Option createEquipeOption() {
-		
-		return new Option("addEquipe", "c", InscriptionsgetInscriptions());
-
-	}
 
 	
-	
-	
-	
-	static ArrayList<String> tab = new ArrayList<String>();
-
-	
-static Action deleteCompetitionOption() {
+	static Action CandidatsDelete()
 	{
 		return new Action()
 		{
 			public void optionSelected()
 			{
 				
-				tab.add("Ligue1");
-				tab.remove("Ligue1");
-				System.out.println(al + " a bien ete supprimee.");
+				al.add("Ginette");
+				al.remove("Ginette");
+				System.out.println(al + " has been deleted.");
 				
 			}
 		};
 	}
 		
-	static Action deleteCandidatOption() {
+	static Action getCandidatsCompetitions()
+	{
+		return new Action()
 		{
-			return new Action()
+			public void optionSelected()
 			{
-				public void optionSelected()
-				{
-					
-//					tab.add("Gisele");
-					tab.remove("Gisele");
-					System.out.println(al + " a bien ete supprimee.");
-					
-				}
-			};
-		}
-			
-
+				System.out.println("Basket");
+				System.out.println("Golf");
+				System.out.println("Course de cheveaux");
+				System.out.println("Handball");
+			}
+		};
 	}
-
-
+	
+	static Action setCandidatsNom()
+	{
+		return new Action()
+		{
+			public void optionSelected()
+			{
+				Scanner sc = new Scanner(System.in);
+				int i = sc.nextInt();
+				String n = sc.nextLine();
+				al.set(i, n);
+			}
+		};
+	}
+	
 	
 	// TODO
 
 	
-	// Menu Candidats
-	private static Menu menuCandidats() {
-		Menu menu = new Menu("Candidats", "c");
+//	 Menu Competitions
+//	private static Menu getmenuCompetitions() {
+//		Menu menu = new Menu("Competitions", "cp");
+//		// TODO
+//		
+//		return menu;
+//	}
+	// TODO
+
+	
+	// Menu Personne
+//		private static Menu getmenuPersonne() {
+//			Menu menu = new Menu("Personnes", "p");
+//			// TODO
+//			
+//			return menu;
+//		}
 		// TODO
-		
-		return menu;
-	}
-=======
-	// TODO
-
-	
-	// Menu Candidats
-	private static Menu menuCandidats() {
-		Menu menu = new Menu("Candidats", "c");
-		// TODO
-		
-		return menu;
-	}
->>>>>>> parent of 12b54c8... menu du Candidat
-	
-	// TODO
-
-	
-	// Menu Competitions
-	private static Menu menuCompetitions() {
-		Menu menu = new Menu("Competitions", "p");
-		// TODO
-		
-		return menu;
-	}
-	// TODO
 
 	
 	// Main
 	public static void main(String[] args)
 	{
-		Menu rootMenu = getMainMenu();
-		rootMenu.start();
+		Menu menu = getMainMenu();
+		menu.start();
+		
+	
 	}
 	
 	
