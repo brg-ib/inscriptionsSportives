@@ -8,6 +8,15 @@ import commandLineMenus.Menu;
 import commandLineMenus.Option;
 import commandLineMenus.rendering.examples.util.InOut;
 
+
+import java.time.LocalDate;
+import java.util.ArrayList;
+
+import entity.Candidat;
+import entity.Competition;
+import entity.Equipe;
+import entity.Personne;
+
 public class MainUser {
 
 
@@ -29,12 +38,96 @@ public class MainUser {
 	
 	
 	// Menu Inscriptions
-	private static Menu menuInscriptions() {
-		Menu menu = new Menu("Inscriptions", "i");
-		// TODO
+	private static Menu getmenuInscriptions() {
 		
+		Menu menu = new Menu("MenuInscriptions","Inscriptions", "i");
+		// TODO 
+		menu.add(createEquipeOption());
+        menu.add(deleteCompetitionOption());
+        menu.add(deleteCandidatOption());        
+		menu.add(addEquipeOption());
+        menu.add(displayEquipeOption());
+        menu.add(modifyEquipeOption());
+        menu.addBack("B");
+		menu.setAutoBack(true);
 		return menu;
+
+        
 	}
+	
+static Option createEquipeOption() {
+		
+		return new Option("createPersonne", "C", createPersonne());
+
+	}
+	
+	
+	static Option createEquipeOption() {
+		
+		return new Option("addEquipe", "A", createEquipe());
+
+	}
+	
+	
+	static Option deleteCompetitionOption() {
+		
+		return new Option("deleteEquipe", "D", InscriptionsDetele(Competition));
+
+	}
+	
+	static Option deleteCandidatOption() {
+		
+		return new Option("addEquipe", "d", InscriptionsDelete(Candidat));
+
+	}
+	static Option createEquipeOption() {
+		
+		return new Option("addEquipe", "c", InscriptionsgetInscriptions());
+
+	}
+
+	
+	
+	
+	
+	static ArrayList<String> tab = new ArrayList<String>();
+
+	
+static Action deleteCompetitionOption() {
+	{
+		return new Action()
+		{
+			public void optionSelected()
+			{
+				
+				tab.add("Ligue1");
+				tab.remove("Ligue1");
+				System.out.println(al + " a bien ete supprimee.");
+				
+			}
+		};
+	}
+		
+	static Action deleteCandidatOption() {
+		{
+			return new Action()
+			{
+				public void optionSelected()
+				{
+					
+//					tab.add("Gisele");
+					tab.remove("Gisele");
+					System.out.println(al + " a bien ete supprimee.");
+					
+				}
+			};
+		}
+			
+
+	}
+
+
+	
 	// TODO
 
 	
