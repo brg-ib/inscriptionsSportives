@@ -23,19 +23,19 @@ public class MainUser {
 		return menu;
 	}
 
-	
-//	DINA
 	 
-	
-	// Menu Candidats
+	/*
+	 * Menu Candidats
+	 * Dina
+	 */
 	private static Menu menuCandidats() {
-		Menu menu = new Menu("Candidats", "Candidat", "C");
+		Menu menu = new Menu("Candidats", "Candidat", "c");
 		// TODO
 		menu.add(getCandidatsOption());
 		menu.add(getCandidatsOption1());
 		menu.add(getCandidatsOption2());
 		menu.add(getCandidatsOption3());
-		menu.addBack("B");
+		menu.addBack("b");
 		menu.setAutoBack(true);
 		return menu;
 	}
@@ -131,16 +131,18 @@ public class MainUser {
 	
 	// TODO
 
-	
-	 //Menu Competitions
+	/*
+	 * Menu compétitions
+	 * Ihcen
+	 */
 	private static Menu menuCompetitions() {
-		Menu menu = new Menu("Competitions", "c");
+		Menu menu = new Menu("Menu","Compétitions", "C");
 		menu.add(afficherCompetitions());
+		//menu.add();
 		// TODO
-		menu.addBack("q");
+		menu.addBack("b");
 		return menu;
 	}
-	// TODO
 
 	static Option afficherCompetitions() {
 		return new Option("Liste des competitions", "l", () -> { 
@@ -149,12 +151,12 @@ public class MainUser {
 	}
 	
 	// Menu Personne
-//		private static Menu getmenuPersonne() {
-//			Menu menu = new Menu("Personnes", "p");
-//			// TODO
-//			
-//			return menu;
-//		}
+		private static Menu getmenuPersonne() {
+			Menu menu = new Menu("Personnes", "p");
+			// TODO
+			
+			return menu;
+		}
 		// TODO
 
 	
