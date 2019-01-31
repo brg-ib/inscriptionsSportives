@@ -16,7 +16,7 @@ public class MainUser {
 		Menu menu = new Menu("Inscriptions Sportives");
 //		menu.add(getmenuInscriptions());
 		menu.add(menuCandidats());
-//		menu.add(getmenuCompetitions());
+		menu.add(menuCompetitions());
 //		menu.add(getmenuPersonne());
 //		menu.add(getmenuExit());
 		menu.addQuit("q");
@@ -132,15 +132,21 @@ public class MainUser {
 	// TODO
 
 	
-//	 Menu Competitions
-//	private static Menu getmenuCompetitions() {
-//		Menu menu = new Menu("Competitions", "cp");
-//		// TODO
-//		
-//		return menu;
-//	}
+	 //Menu Competitions
+	private static Menu menuCompetitions() {
+		Menu menu = new Menu("Competitions", "c");
+		menu.add(afficherCompetitions());
+		// TODO
+		menu.addBack("q");
+		return menu;
+	}
 	// TODO
 
+	static Option afficherCompetitions() {
+		return new Option("Liste des competitions", "l", () -> { 
+			System.out.println(Inscriptions.getInscriptions().getCompetitions());
+			});
+	}
 	
 	// Menu Personne
 //		private static Menu getmenuPersonne() {
