@@ -1,7 +1,6 @@
 package menuUser;
 
 import java.util.*;
-import java.util.ArrayList;
 
 import inscriptions.*;
 
@@ -16,7 +15,7 @@ public class MainUser {
 	 private static Menu getMainMenu(){
 		Menu menu = new Menu("Inscriptions Sportives");
 //		menu.add(getmenuInscriptions());
-		menu.add(getmenuCandidats());
+		menu.add(menuCandidats());
 //		menu.add(getmenuCompetitions());
 //		menu.add(getmenuPersonne());
 //		menu.add(getmenuExit());
@@ -24,15 +23,12 @@ public class MainUser {
 		return menu;
 	}
 
-
-
-
 	
 //	DINA
 	 
 	
 	// Menu Candidats
-	private static Menu getmenuCandidats() {
+	private static Menu menuCandidats() {
 		Menu menu = new Menu("Candidats", "Candidat", "C");
 		// TODO
 		menu.add(getCandidatsOption());
