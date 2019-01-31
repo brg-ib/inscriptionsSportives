@@ -38,6 +38,7 @@ public class MainUser {
 	
 	
 	// Menu Inscriptions
+<<<<<<< HEAD
 	private static Menu getmenuInscriptions() {
 		
 		Menu menu = new Menu("MenuInscriptions","Inscriptions", "i");
@@ -50,10 +51,17 @@ public class MainUser {
         menu.add(modifyEquipeOption());
         menu.addBack("B");
 		menu.setAutoBack(true);
+=======
+	private static Menu menuInscriptions() {
+		Menu menu = new Menu("Inscriptions", "i");
+		// TODO
+		
+>>>>>>> parent of 12b54c8... menu du Candidat
 		return menu;
 
         
 	}
+<<<<<<< HEAD
 	
 static Option createEquipeOption() {
 		
@@ -138,6 +146,18 @@ static Action deleteCompetitionOption() {
 		
 		return menu;
 	}
+=======
+	// TODO
+
+	
+	// Menu Candidats
+	private static Menu menuCandidats() {
+		Menu menu = new Menu("Candidats", "c");
+		// TODO
+		
+		return menu;
+	}
+>>>>>>> parent of 12b54c8... menu du Candidat
 	
 	// TODO
 
