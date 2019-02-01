@@ -13,7 +13,7 @@ public class MainUser {
 	
 	// Menu principal
 	 private static Menu getMainMenu(){
-		Menu menu = new Menu("Inscriptions Sportives");
+		Menu menu = new Menu("Menu | Inscriptions Sportives");
 //		menu.add(getmenuInscriptions());
 		menu.add(menuCandidats());
 		menu.add(menuCompetitions());
@@ -29,7 +29,7 @@ public class MainUser {
 	 * Dina
 	 */
 	private static Menu menuCandidats() {
-		Menu menu = new Menu("Candidats", "Candidat", "c");
+		Menu menu = new Menu("Gestion des candidats", "Candidat", "c");
 		// TODO
 		menu.add(getCandidatsOption());
 		menu.add(getCandidatsOption1());
@@ -42,27 +42,27 @@ public class MainUser {
 	
 	static Option getCandidatsOption()
 	{
-		return new Option("Nom", "N", getCandidatsNom());
+		return new Option("Nom", "n", getCandidatsNom());
 
 	}
 	
 	static Option getCandidatsOption1()
 	{
 
-		return new Option("Delete", "D", CandidatsDelete());
+		return new Option("Delete", "d", CandidatsDelete());
 
 	}
 	
 	static Option getCandidatsOption2()
 	{
 
-		return new Option("Modifier le Nom", "MN", setCandidatsNom());
+		return new Option("Modifier le Nom", "m", setCandidatsNom());
 	}
 	
 	static Option getCandidatsOption3()
 	{
 
-		return new Option("Comp�titions", "C", getCandidatsCompetitions());
+		return new Option("Compétitions", "c", getCandidatsCompetitions());
 
 	}
 	
@@ -136,10 +136,9 @@ public class MainUser {
 	 * Ihcen
 	 */
 	private static Menu menuCompetitions() {
-		Menu menu = new Menu("Menu","Compétitions", "C");
+		Menu menu = new Menu("Gestion des compétitions","Compétitions", "p");
 		menu.add(afficherCompetitions());
-		//menu.add();
-		// TODO
+	//	menu.add(editerCompetitions());
 		menu.addBack("b");
 		return menu;
 	}
@@ -149,6 +148,10 @@ public class MainUser {
 			System.out.println(Inscriptions.getInscriptions().getCompetitions());
 			});
 	}
+	
+//	static Option editerCompetitions() {
+//		return null;
+//	}
 	
 	// Menu Personne
 		private static Menu getmenuPersonne() {
@@ -160,7 +163,9 @@ public class MainUser {
 		// TODO
 
 	
-	// Main
+		/*
+		 * Main
+		 */
 	public static void main(String[] args)
 	{
 		Menu menu = getMainMenu();
