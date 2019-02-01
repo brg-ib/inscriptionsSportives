@@ -149,6 +149,7 @@ public class MainUser {
 			});
 	}
 	
+	
 //	static Option editerCompetitions() {
 //		return null;
 //	}
