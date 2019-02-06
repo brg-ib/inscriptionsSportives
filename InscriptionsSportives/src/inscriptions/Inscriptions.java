@@ -21,9 +21,9 @@ public class Inscriptions implements Serializable
 {
 	private static final long serialVersionUID = -3095339436048473524L;
 	private static final String FILE_NAME = "Inscriptions.srz";
-	public static Inscriptions inscriptions;
+	private static Inscriptions inscriptions;
 	
-	public SortedSet<Competition> competitions = new TreeSet<>();
+	private SortedSet<Competition> competitions = new TreeSet<>();
 	private SortedSet<Candidat> candidats = new TreeSet<>();
 
 	private Inscriptions()
@@ -40,7 +40,6 @@ public class Inscriptions implements Serializable
 		return Collections.unmodifiableSortedSet(competitions);
 	}
 	
-	
 	/**
 	 * Retourne tous les candidats (personnes et équipes confondues).
 	 * @return
@@ -48,7 +47,6 @@ public class Inscriptions implements Serializable
 	
 	public SortedSet<Candidat> getCandidats()
 	{
-		SortedSet<Candidat> candidats = new TreeSet<>();
 		return Collections.unmodifiableSortedSet(candidats);
 	}
 
@@ -253,7 +251,7 @@ public class Inscriptions implements Serializable
 		lesManouches.add(tony);
 		lesManouches.delete();
 		System.out.println(inscriptions);
-			try
+		try
 			{
 				inscriptions.sauvegarder();
 			} 

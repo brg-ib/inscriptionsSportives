@@ -3,7 +3,6 @@ package inscriptions;
 import java.io.Serializable;
 import java.util.Collections;
 import java.util.Set;
-import java.util.SortedSet;
 import java.util.TreeSet;
 
 /**
@@ -14,16 +13,14 @@ import java.util.TreeSet;
 public abstract class Candidat implements Comparable<Candidat>, Serializable
 {
 	private static final long serialVersionUID = -6035399822298694746L;
-	private static Inscriptions inscriptions;
-	private static Candidat candidat;
-	private static String nom;
-	private static Set<Competition> competitions;
+	private Inscriptions inscriptions;
+	private String nom;
+	private Set<Competition> competitions;
 	
 	Candidat(Inscriptions inscriptions, String nom)
 	{
-		Candidat.inscriptions = inscriptions;
-		
-		Candidat.nom = nom;
+		this.inscriptions = inscriptions;	
+		this.nom = nom;
 		competitions = new TreeSet<>();
 	}
 
@@ -32,7 +29,7 @@ public abstract class Candidat implements Comparable<Candidat>, Serializable
 	 * @return
 	 */
 	
-	public static String getNom()
+	public String getNom()
 	{
 		return nom;
 	}
@@ -42,9 +39,9 @@ public abstract class Candidat implements Comparable<Candidat>, Serializable
 	 * @param nom
 	 */
 	
-	public static void setNom(String nom)
+	public void setNom(String nom)
 	{
-		Candidat.nom = nom;
+		this.nom = nom;
 	}
 
 	/**
@@ -52,9 +49,8 @@ public abstract class Candidat implements Comparable<Candidat>, Serializable
 	 * @return
 	 */
 
-	public static Set<Competition> getCompetitions()
+	public Set<Competition> getCompetitions()
 	{
-		SortedSet<Competition> competitions = new TreeSet<>();
 		return Collections.unmodifiableSet(competitions);
 	}
 	
@@ -72,11 +68,11 @@ public abstract class Candidat implements Comparable<Candidat>, Serializable
 	 * Supprime un candidat de l'application.
 	 */
 	
-	public static void delete()
+	public void delete()
 	{
 		for (Competition c : competitions)
-			c.remove(candidat);
-		inscriptions.delete(candidat);
+			c.remove(this);
+		inscriptions.delete(this);
 	}
 	
 	@Override

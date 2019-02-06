@@ -15,18 +15,17 @@ import java.util.TreeSet;
 public class Competition implements Comparable<Competition>, Serializable
 {
 	private static final long serialVersionUID = -2882150118573759729L;
-	private static Inscriptions inscriptions;
-	private static Competition competition;
-	private static String nom;
-	private static Set<Candidat> candidats;
-	private static LocalDate dateCloture;
+	private Inscriptions inscriptions;
+	private String nom;
+	private Set<Candidat> candidats;
+	private LocalDate dateCloture;
 	private boolean enEquipe = false;
 
 	Competition(Inscriptions inscriptions, String nom, LocalDate dateCloture, boolean enEquipe)
 	{
 		this.enEquipe = enEquipe;
-		Competition.inscriptions = inscriptions;
-		Competition.nom = nom;
+		this.inscriptions = inscriptions;
+		this.nom = nom;
 		this.dateCloture = dateCloture;
 		candidats = new TreeSet<>();
 	}
@@ -45,9 +44,9 @@ public class Competition implements Comparable<Competition>, Serializable
 	 * Modifie le nom de la compétition.
 	 */
 	
-	public static void setNom(String nom)
+	public void setNom(String nom)
 	{
-		Competition.nom = nom ;
+		this.nom = nom ;
 	}
 	
 	/**
@@ -69,7 +68,7 @@ public class Competition implements Comparable<Competition>, Serializable
 	 * @return
 	 */
 	
-	public static LocalDate getDateCloture()
+	public LocalDate getDateCloture()
 	{
 		return dateCloture;
 	}
@@ -104,7 +103,7 @@ public class Competition implements Comparable<Competition>, Serializable
 	 * @return
 	 */
 	
-	public static Set<Candidat> getCandidats()
+	public Set<Candidat> getCandidats()
 	{
 		return Collections.unmodifiableSet(candidats);
 	}
@@ -164,9 +163,9 @@ public class Competition implements Comparable<Competition>, Serializable
 	 * @return
 	 */
 	
-	public static boolean remove(Candidat candidat)
+	public boolean remove(Candidat candidat)
 	{
-		candidat.remove(competition);
+		candidat.remove(this);
 		return candidats.remove(candidat);
 	}
 	
@@ -174,11 +173,11 @@ public class Competition implements Comparable<Competition>, Serializable
 	 * Supprime la compétition de l'application.
 	 */
 	
-	public static void delete()
+	public void delete()
 	{
 		for (Candidat candidat : candidats)
 			remove(candidat);
-		inscriptions.delete(competition);
+		inscriptions.delete(this);
 	}
 	
 	@Override

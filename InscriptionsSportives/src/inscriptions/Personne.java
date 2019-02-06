@@ -2,7 +2,6 @@ package inscriptions;
 
 import java.util.Collections;
 import java.util.Set;
-import java.util.SortedSet;
 import java.util.TreeSet;
 
 /**
@@ -12,15 +11,14 @@ import java.util.TreeSet;
 public class Personne extends Candidat
 {
 	private static final long serialVersionUID = 4434646724271327254L;
-	private static String prenom;
-	private static String mail;
-	private static Set<Equipe> equipes;
+	private String prenom, mail;
+	private Set<Equipe> equipes;
 	
 	Personne(Inscriptions inscriptions, String nom, String prenom, String mail)
 	{
 		super(inscriptions, nom);
-		Personne.prenom = prenom;
-		Personne.mail = mail;
+		this.prenom = prenom;
+		this.mail = mail;
 		equipes = new TreeSet<>();
 	}
 
@@ -29,7 +27,7 @@ public class Personne extends Candidat
 	 * @return
 	 */
 	
-	public static String getPrenom()
+	public String getPrenom()
 	{
 		return prenom;
 	}
@@ -39,9 +37,9 @@ public class Personne extends Candidat
 	 * @param prenom
 	 */
 	
-	public static void setPrenom(String prenom)
+	public void setPrenom(String prenom)
 	{
-		Personne.prenom = prenom;
+		this.prenom = prenom;
 	}
 
 	/**
@@ -49,7 +47,7 @@ public class Personne extends Candidat
 	 * @return
 	 */
 	
-	public static String getMail()
+	public String getMail()
 	{
 		return mail;
 	}
@@ -59,26 +57,19 @@ public class Personne extends Candidat
 	 * @param mail
 	 */
 	
-	public static void setMail(String mail)
+	public void setMail(String mail)
 	{
-		Personne.mail = mail;
+		this.mail = mail;
 	}
 
-		
 	/**
 	 * Retoure les équipes dont cette personne fait partie.
 	 * @return
 	 */
 	
-	
-	public static Set<Equipe> getEquipes()
+	public Set<Equipe> getEquipes()
 	{
-//		return Collections.unmodifiableSet(equipes);
-		SortedSet<Equipe> equipes = new TreeSet<>();
-//		for (Personne c : Personne())
-//			if (c instanceof Inscription.Equipe)
-//				equipes.add((Inscription.Equipe)c);
-		return Collections.unmodifiableSortedSet(equipes);
+		return Collections.unmodifiableSet(equipes);
 	}
 	
 	boolean add(Equipe equipe)
@@ -92,12 +83,11 @@ public class Personne extends Candidat
 	}
 	
 	@Override
-	public static void delete()
+	public void delete()
 	{
-		
+		super.delete();
 		for (Equipe e : equipes)
 			e.remove(this);
-		Candidat.delete();
 	}
 	
 	@Override
