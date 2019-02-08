@@ -99,8 +99,10 @@ public class MainUser {
     @SuppressWarnings("unused")
     private Option addCompetition(){
         return new Option("Ajouter une compétition", "a", () -> {
+        	
+        	
         	try {
-                Inscriptions.getInscriptions().createCompetition(InOut.getString("nom : "),LocalDate.of(InOut.getInt("Annee:"),InOut.getInt("Mois:"),InOut.getInt("Jour:")), InOut.getInt("0 - Compétition Seul \n1 - Compétition en Equipe : ") == 1);
+                Inscriptions.getInscriptions().createCompetition(InOut.getString("nom : "), LocalDate.of(InOut.getInt("Annee:"),InOut.getInt("Mois:"),InOut.getInt("Jour:")), InOut.getInt("0 - Compétition Seul \n1 - Compétition en Equipe : ") == 1);
                 } catch (Exception e) {
                 e.printStackTrace();
             }
@@ -121,7 +123,7 @@ public class MainUser {
     // OK
     private Option listCandidat(Competition competition)
     {
-        return new Option("Liste des candidats", "l", () -> {
+        return new Option("Liste des candidats", "z", () -> {
             System.out.println(competition.getCandidats());
         });
     }
@@ -169,7 +171,7 @@ public class MainUser {
     // Ok
     private Option removeCompetition(Competition competition)
     {
-        return new Option("Supprimer une compétition", "s",
+        return new Option("Supprimer une compétition", "ss",
         () ->
         {
             competition.delete();
