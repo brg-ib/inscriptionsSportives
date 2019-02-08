@@ -217,32 +217,124 @@ public class MainUser {
 				);
 		}
 
-		/*
-		 * Menu Gestion Personne
-		 */
-		private Menu editerPersonne(Personne personne){
-		    Menu menu = new Menu("Editer " + personne.getNom());
-		    menu.add(editPersonne(personne));
-	        menu.add(deletePersonne(personne));
-		    menu.addBack("q");
-	   		menu.setAutoBack(true);
-		    return menu;
-		}
-
-		private Option editPersonne(Personne personne){
-			return new Option("Modifier une personne", "a", () -> {
-			
-			personne.setNom(getString("Nouveau nom : \n"));
-			personne.setPrenom(getString("Nouveau prenom : \n"));
-			personne.setMail(getString("Nouveau mail : \n"));
-
-			});
-	}
 	
-	private Option deletePersonne(Personne personne)
-	{
-		return new Option("Supprimer une personne", "b", () -> {personne.delete();});
+
+	
+	
+	/*
+	 * Menu Gestion Personne
+	 */
+	private Menu editerPersonne(Personne personne){
+	    Menu menu = new Menu("Editer " + personne.getNom());
+	    menu.add(editPersonne(personne));
+        menu.add(deletePersonne(personne));
+	    menu.addBack("q");
+   		menu.setAutoBack(true);
+	    return menu;
 	}
+
+	private Option editPersonne(Personne personne){
+		return new Option("Modifier une personne", "a", () -> {
+		
+		personne.setNom(getString("Nouveau nom : \n"));
+		personne.setPrenom(getString("Nouveau prenom : \n"));
+		personne.setMail(getString("Nouveau mail : \n"));
+
+		});
+
+
+private Option deletePersonne(Personne personne)
+{
+	return new Option("Supprimer une personne", "b", () -> {personne.delete();});
+}
+
+/*
+ * Menu Equipe
+ */
+
+private Menu menuEquipe() {
+	Menu menu = new Menu("Gestion des equipes", "p");
+	// Afficher
+	menu.add(listEquipe());
+	// Ajouter / Creer
+	menu.add(addEquipe());
+	// Modifier
+	menu.add(selectEquipe());
+	// Option
+	menu.addBack("b");
+	menu.setAutoBack(true);
+	return menu;
+}
+
+// 	 * Retourne l'ensemble des personnes formant l'Ã©quipe.
+
+private Option listEquipe(){
+	return new Option("Liste des équipes", "l", () -> {System.out.println(Inscriptions.getInscriptions().getEquipes());});
+
+}
+
+private Option addEquipe(){
+	return new Option("Ajouter une nouvelle équipe", "a", () -> {Inscriptions.getInscriptions().createEquipe(getString("Nom de l'équipe : \n"));});
+}
+
+
+private List<Equipe> selectEquipe(){
+	return new List<Equipe>("Sélectionner une équipe :","e" () -> new ArrayList<>(inscriptions.getEquipes()),
+			(element) -> editerEquipe(element)
+			);
+}
+
+/*
+ * Menu Gestion Equipe
+ */
+
+
+private Menu editerEquipe(Equipe equipe)
+{
+    Menu menu = new Menu("Editer " + equipe.getNom());
+    menu.add(listMembres(equipe));
+    menu.add(addMembre(equipe));
+    menu.add(deleteMembre(equipe));
+    menu.add(deleteEquipe(equipe));
+    menu.addBack("q");
+    return menu;
+}
+
+private Option lsitMembres(Equipe equipe)
+{
+	return new Option("Afficher l'équipe", "a", 
+			() -> 
+			{
+				System.out.println(equipe.getMembres());
+			}
+	);
+}
+
+private List<Personne> addMembre(Equipe equipe)
+{
+	return new List<>("Ajouter un membre", "m", 
+			() -> new ArrayList<>(inscriptions.getPersonnes()),
+			(index, element) -> {equipe.add(element);}
+			);
+}
+
+private List<Personne> deleteMembre(Equipe equipe)
+{
+	return new List<>("Supprimer un membre", "s", 
+			() -> new ArrayList<>(equipe.getMembres()),
+			(index, element) -> {equipe.remove(element);}
+			);
+}
+
+private Option deleteEquipe(final Equipe equipe)
+{
+	return new Option("Supprimer l'équipe", "d", 
+			() -> 
+			{
+				equipe.delete();
+			}
+	);
+}
 
 	
 		
