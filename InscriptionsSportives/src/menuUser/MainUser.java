@@ -327,7 +327,7 @@ public class MainUser {
         );
     }
     
-    private Option deleteEquipe(final Equipe equipe)
+    private Option deleteEquipe(Equipe equipe)
     {
         return new Option("Supprimer l'équipe", "d",
         () ->
