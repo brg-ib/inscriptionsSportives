@@ -29,7 +29,6 @@ public class MainUser {
         menu.add(menuCompetitions());
         menu.add(menuPersonne());
         menu.add(menuEquipe());
-        //        menu.add(getmenuExit());
         menu.addQuit("q");
         return menu;
     }
