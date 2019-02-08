@@ -241,6 +241,7 @@ public class MainUser {
 		personne.setMail(getString("Nouveau mail : \n"));
 
 		});
+	}
 
 
 private Option deletePersonne(Personne personne)
@@ -269,17 +270,17 @@ private Menu menuEquipe() {
 // 	 * Retourne l'ensemble des personnes formant l'Ã©quipe.
 
 private Option listEquipe(){
-	return new Option("Liste des équipes", "l", () -> {System.out.println(Inscriptions.getInscriptions().getEquipes());});
+	return new Option("Liste des ï¿½quipes", "l", () -> {System.out.println(Inscriptions.getInscriptions().getEquipes());});
 
 }
 
 private Option addEquipe(){
-	return new Option("Ajouter une nouvelle équipe", "a", () -> {Inscriptions.getInscriptions().createEquipe(getString("Nom de l'équipe : \n"));});
+	return new Option("Ajouter une nouvelle Ã©quipe", "a", () -> {Inscriptions.getInscriptions().createEquipe(getString("Nom de l'ï¿½quipe : \n"));});
 }
 
 
 private List<Equipe> selectEquipe(){
-	return new List<Equipe>("Sélectionner une équipe :","e" () -> new ArrayList<>(inscriptions.getEquipes()),
+	return new List<Equipe>("SÃ©lectionner une Ã©quipe :","e", () -> new ArrayList<>(Inscriptions.getInscriptions().getEquipes()),
 			(element) -> editerEquipe(element)
 			);
 }
@@ -300,9 +301,9 @@ private Menu editerEquipe(Equipe equipe)
     return menu;
 }
 
-private Option lsitMembres(Equipe equipe)
+private Option listMembres(Equipe equipe)
 {
-	return new Option("Afficher l'équipe", "a", 
+	return new Option("Afficher l'ï¿½quipe", "a", 
 			() -> 
 			{
 				System.out.println(equipe.getMembres());
@@ -313,7 +314,7 @@ private Option lsitMembres(Equipe equipe)
 private List<Personne> addMembre(Equipe equipe)
 {
 	return new List<>("Ajouter un membre", "m", 
-			() -> new ArrayList<>(inscriptions.getPersonnes()),
+			() -> new ArrayList<>(Inscriptions.getInscriptions().getPersonnes()),
 			(index, element) -> {equipe.add(element);}
 			);
 }
@@ -328,7 +329,7 @@ private List<Personne> deleteMembre(Equipe equipe)
 
 private Option deleteEquipe(final Equipe equipe)
 {
-	return new Option("Supprimer l'équipe", "d", 
+	return new Option("Supprimer l'Ã©quipe", "d", 
 			() -> 
 			{
 				equipe.delete();
