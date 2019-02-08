@@ -158,7 +158,7 @@ public class Competition implements Comparable<Competition>, Serializable
 	}
 	
 	/**
-	 * Désinscrit un candidat.
+	 * Desinscrit un candidat.
 	 * @param candidat
 	 * @return
 	 */
@@ -170,14 +170,18 @@ public class Competition implements Comparable<Competition>, Serializable
 	}
 	
 	/**
-	 * Supprime la compétition de l'application.
+	 * Supprime la competition de l'application.
 	 */
 	
 	public void delete()
 	{
-		for (Candidat candidat : candidats)
-			remove(candidat);
+		
+		
+		for(Candidat c : candidats)
+			c.remove(this);
 		inscriptions.delete(this);
+
+		
 	}
 	
 	@Override
