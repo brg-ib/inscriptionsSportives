@@ -4,6 +4,5 @@
 	<classpathentry kind="con" path="org.eclipse.jdt.USER_LIBRARY/CommandLine"/>
 	<classpathentry kind="src" path="InscriptionsSportives/src"/>
 	<classpathentry kind="con" path="org.eclipse.jdt.junit.JUNIT_CONTAINER/4"/>
-	<classpathentry kind="lib" path="C:/Users/Moha/eclipse-workspace/CommandLine-master/CommandLine/jar/commandLineMenus.jar"/>
 	<classpathentry kind="output" path="InscriptionsSportives/bin"/>
 </classpath>
