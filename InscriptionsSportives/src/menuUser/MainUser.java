@@ -28,7 +28,7 @@ public class MainUser {
 		Menu menu = new Menu("Bienvenue | Inscriptions Sportives");
 		menu.add(menuCompetitions());
 		menu.add(menuPersonne());
-//		menu.add(getmenuEquipe());
+		menu.add(menuEquipe());
 //		menu.add(getmenuExit());
 		menu.addQuit("q");
 		return menu;
@@ -254,7 +254,7 @@ private Option deletePersonne(Personne personne)
  */
 
 private Menu menuEquipe() {
-	Menu menu = new Menu("Gestion des equipes", "p");
+	Menu menu = new Menu("Gestion des equipes", "e");
 	// Afficher
 	menu.add(listEquipe());
 	// Ajouter / Creer
