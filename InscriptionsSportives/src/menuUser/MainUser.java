@@ -12,8 +12,8 @@ import static commandLineMenus.rendering.examples.util.InOut.*;
 import java.time.LocalDate;
 
 public class MainUser {
-    
-    
+        
+	
     /*
     * Start Application
     */
@@ -29,7 +29,6 @@ public class MainUser {
         menu.add(menuCompetitions());
         menu.add(menuPersonne());
         menu.add(menuEquipe());
-        //        menu.add(getmenuExit());
         menu.addQuit("q");
         return menu;
     }
@@ -100,9 +99,8 @@ public class MainUser {
     @SuppressWarnings("unused")
     private Option addCompetition(){
         return new Option("Ajouter une compétition", "a", () -> {
-            String dateCloture = InOut.getString("Entrer la date de clôture des inscriptions de la compétition (AAAA-MM-JJ) : ");
-            try {
-                Inscriptions.getInscriptions().createCompetition(InOut.getString("nom : "),  LocalDate.of(2019, 12, 12), InOut.getInt("0 - Compétition de personnes \n1 - Compétition d'équipes : ")==1);
+        	try {
+                Inscriptions.getInscriptions().createCompetition(InOut.getString("nom : "),LocalDate.of(InOut.getInt("Annee:"),InOut.getInt("Mois:"),InOut.getInt("Jour:")), InOut.getInt("0 - Compétition Seul \n1 - Compétition en Equipe : ") == 1);
                 } catch (Exception e) {
                 e.printStackTrace();
             }
