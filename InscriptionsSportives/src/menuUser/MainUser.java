@@ -73,7 +73,7 @@ public class MainUser {
 	}
 	
 	/*
-	 * Menu 
+	 * Menu Gestion Competition
 	 */
 	private Menu editCompetition(Competition competition)
     {
@@ -270,7 +270,7 @@ private Menu menuEquipe() {
 // 	 * Retourne l'ensemble des personnes formant l'équipe.
 
 private Option listEquipe(){
-	return new Option("Liste des �quipes", "l", () -> {System.out.println(Inscriptions.getInscriptions().getEquipes());});
+	return new Option("Liste des équipes", "l", () -> {System.out.println(Inscriptions.getInscriptions().getEquipes());});
 
 }
 
@@ -303,7 +303,7 @@ private Menu editerEquipe(Equipe equipe)
 
 private Option listMembres(Equipe equipe)
 {
-	return new Option("Afficher l'�quipe", "a", 
+	return new Option("Afficher l'équipe", "a", 
 			() -> 
 			{
 				System.out.println(equipe.getMembres());
