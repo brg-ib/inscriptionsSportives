@@ -176,7 +176,7 @@ public class Competition implements Comparable<Competition>, Serializable
 	public void delete()
 	{
 		for (Candidat candidat : candidats)
-			remove(candidat);
+			candidat.remove(this);
 		inscriptions.delete(this);
 	}
 	

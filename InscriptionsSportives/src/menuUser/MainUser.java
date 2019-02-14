@@ -60,7 +60,9 @@ public class MainUser {
     // OK
     private Option listCompetition()
     {
-        return new Option("Liste des compétitions", "l", () -> {System.out.println(Inscriptions.getInscriptions().getCompetitions());});
+        return new Option("Liste des compétitions", "l", () -> {
+        	System.out.println("Liste des Competitions :");
+        	System.out.println(Inscriptions.getInscriptions().getCompetitions());});
     }
     
     // OK
@@ -133,7 +135,7 @@ public class MainUser {
     {
         
         return new List<>("Ajouter une personne dans la compétition", "p",
-        () -> new ArrayList<>(Inscriptions.getInscriptions().getPersonnes()),
+        () -> new ArrayList<>(Inscriptions.getInscriptions().getCandidats()),
         (index, element) -> {competition.add((Personne) element);}
         );
     }
@@ -275,12 +277,12 @@ public class MainUser {
     }
     
     private Option addEquipe(){
-        return new Option("Ajouter une nouvelle équipe", "a", () -> {Inscriptions.getInscriptions().createEquipe(getString("Nom de l'�quipe : \n"));});
+        return new Option("Ajouter une nouvelle équipe", "a", () -> {Inscriptions.getInscriptions().createEquipe(getString("Nom de l'équipe : \n"));});
     }
     
     
     private List<Equipe> selectEquipe(){
-        return new List<Equipe>("Sélectionner une équipe :","e", () -> new ArrayList<>(Inscriptions.getInscriptions().getEquipes()),
+        return new List<Equipe>("Sélectionner une équipe","e", () -> new ArrayList<>(Inscriptions.getInscriptions().getEquipes()),
         (element) -> editerEquipe(element)
         );
     }
@@ -298,6 +300,7 @@ public class MainUser {
         menu.add(deleteMembre(equipe));
         menu.add(deleteEquipe(equipe));
         menu.addBack("q");
+        menu.setAutoBack(true);
         return menu;
     }
     
