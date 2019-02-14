@@ -175,18 +175,9 @@ public class Competition implements Comparable<Competition>, Serializable
 	
 	public void delete()
 	{
-<<<<<<< HEAD
 		for (Candidat candidat : candidats)
 			candidat.remove(this);
-=======
-		
-		
-		for(Candidat c : candidats)
-			c.remove(this);
->>>>>>> acc06c9c14adffe8ba590bf5400f391cb00744fa
-		inscriptions.delete(this);
-
-		
+		inscriptions.delete(this);	
 	}
 	
 	@Override
