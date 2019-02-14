@@ -114,7 +114,7 @@ public class MainUser {
     // OK
     private Option listCompetition(Competition competition)
     {
-        return new Option("Liste des competitions", "l", () -> {
+        return new Option("Detail de la competition", "l", () -> {
             System.out.println(competition.getNom());
             System.out.println(competition.getDateCloture());
             System.out.println(competition.estEnEquipe());
@@ -125,7 +125,7 @@ public class MainUser {
     // OK
     private Option listCandidat(Competition competition)
     {
-        return new Option("Liste des candidats", "z", () -> {
+        return new Option("Afficher les candidats", "z", () -> {
             System.out.println(competition.getCandidats());
         });
     }
@@ -231,12 +231,12 @@ public class MainUser {
         menu.add(editPersonne(personne));
         menu.add(deletePersonne(personne));
         menu.addBack("q");
-        menu.setAutoBack(true);
+//        menu.setAutoBack(true);
         return menu;
     }
     
     private Option editPersonne(Personne personne){
-        return new Option("Modifier une personne", "a", () -> {
+        return new Option("Modifier", "a", () -> {
             
             personne.setNom(getString("Nouveau nom : \n"));
             personne.setPrenom(getString("Nouveau prenom : \n"));
@@ -248,13 +248,12 @@ public class MainUser {
     
     private Option deletePersonne(Personne personne)
     {
-        return new Option("Supprimer une personne", "b", () -> {personne.delete();});
+        return new Option("Supprimer", "b", () -> {personne.delete();});
     }
     
     /*
     * Menu Equipe
     */
-    
     private Menu menuEquipe() {
         Menu menu = new Menu("Gestion des equipes", "e");
         // Afficher
@@ -270,7 +269,6 @@ public class MainUser {
     }
     
     //      * Retourne l'ensemble des personnes formant l'équipe.
-    
     private Option listEquipe(){
         return new Option("Liste des équipes", "l", () -> {System.out.println(Inscriptions.getInscriptions().getEquipes());});
         
@@ -290,8 +288,6 @@ public class MainUser {
     /*
     * Menu Gestion Equipe
     */
-    
-    
     private Menu editerEquipe(Equipe equipe)
     {
         Menu menu = new Menu("Editer " + equipe.getNom());
