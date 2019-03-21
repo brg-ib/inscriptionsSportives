@@ -218,10 +218,7 @@ public class MainUser {
         (element) -> editerPersonne(element)
         );
     }
-    
-    
-    
-    
+
     
     /*
     * Menu Gestion Personne
