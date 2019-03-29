@@ -4,6 +4,10 @@
 	<classpathentry kind="con" path="org.eclipse.jdt.USER_LIBRARY/CommandLine"/>
 	<classpathentry kind="src" path="InscriptionsSportives/src"/>
 	<classpathentry kind="con" path="org.eclipse.jdt.junit.JUNIT_CONTAINER/4"/>
+<<<<<<< HEAD
 	<classpathentry combineaccessrules="false" kind="src" path="/CommandLine"/>
+=======
+	<classpathentry kind="lib" path="InscriptionsSportives/lib/mysql-connector-java-5.1.18-bin.jar"/>
+>>>>>>> d79ffebe9546163a8a26003691d3d25bc85ba9ef
 	<classpathentry kind="output" path="InscriptionsSportives/bin"/>
 </classpath>
