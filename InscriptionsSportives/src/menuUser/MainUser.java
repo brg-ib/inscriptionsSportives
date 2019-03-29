@@ -129,7 +129,7 @@ public class MainUser {
             System.out.println(competition.getCandidats());
         });
     }
-    
+     
     // OK
     private List<Candidat> addPersonneCompetition(Competition competition)
     {
@@ -218,10 +218,7 @@ public class MainUser {
         (element) -> editerPersonne(element)
         );
     }
-    
-    
-    
-    
+
     
     /*
     * Menu Gestion Personne
