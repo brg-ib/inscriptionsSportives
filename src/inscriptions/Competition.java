@@ -2,9 +2,16 @@ package inscriptions;
 
 import java.io.Serializable;
 import java.util.Collections;
+import java.util.Date;
 import java.time.LocalDate;
 import java.util.Set;
 import java.util.TreeSet;
+
+import javax.persistence.*;
+
+import org.hibernate.annotations.Cascade;
+import org.hibernate.annotations.CascadeType;
+import org.hibernate.annotations.SortNatural;
 
 /**
  * Représente une compétition, c'est-à-dire un ensemble de candidats 
@@ -12,13 +19,24 @@ import java.util.TreeSet;
  *
  */
 
+@Entity
 public class Competition implements Comparable<Competition>, Serializable
 {
 	private static final long serialVersionUID = -2882150118573759729L;
+	
+	@Transient
 	private Inscriptions inscriptions;
 	private String nom;
+	
+	@ManyToMany
+	@Cascade(value = { CascadeType.ALL })
+	@SortNatural
 	private Set<Candidat> candidats;
+	
+	@Temporal(TemporalType.TIMESTAMP)
 	private LocalDate dateCloture;
+	
+	@Column(columnDefinition="tinyint(1) default 0")
 	private boolean enEquipe = false;
 
 	Competition(Inscriptions inscriptions, String nom, LocalDate dateCloture, boolean enEquipe)
@@ -93,7 +111,7 @@ public class Competition implements Comparable<Competition>, Serializable
 		if (getDateCloture().isBefore(dateCloture))
 			this.dateCloture = dateCloture;
 		else
-			throw new RuntimeException("Impossible de modifier la date.");
+			throw new RuntimeException("Impossible d'avancer la date.");
 	}
 	
 	/**
