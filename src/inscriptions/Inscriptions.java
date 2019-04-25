@@ -11,6 +11,8 @@ import java.time.LocalDate;
 import java.util.SortedSet;
 import java.util.TreeSet;
 
+import menuUser.DialogueMain;
+import hibernate.Passerelle;
 /**
  * Point d'entrée dans l'application, un seul objet de type Inscription
  * permet de gérer les compétitions, candidats (de type equipe ou personne)
@@ -82,16 +84,17 @@ public class Inscriptions implements Serializable
 	 * Créée une compétition. Ceci est le seul moyen, il n'y a pas
 	 * de constructeur public dans {@link Competition}.
 	 * @param nom
-	 * @param dateCloture
+	 * @param date
 	 * @param enEquipe
 	 * @return
 	 */
 	
 	public Competition createCompetition(String nom, 
-			LocalDate dateCloture, boolean enEquipe)
+			LocalDate date, boolean enEquipe)
 	{
-		Competition competition = new Competition(this, nom, dateCloture, enEquipe);
+		Competition competition = new Competition(this, nom, date, enEquipe);
 		competitions.add(competition);
+		Passerelle.save(competition);
 		return competition;
 	}
 
@@ -109,6 +112,7 @@ public class Inscriptions implements Serializable
 	{
 		Personne personne = new Personne(this, nom, prenom, mail);
 		candidats.add(personne);
+		Passerelle.save(personne);
 		return personne;
 	}
 	
@@ -125,6 +129,7 @@ public class Inscriptions implements Serializable
 	{
 		Equipe equipe = new Equipe(this, nom);
 		candidats.add(equipe);
+		Passerelle.save(equipe);
 		return equipe;
 	}
 	
@@ -161,7 +166,7 @@ public class Inscriptions implements Serializable
 	 * et candidats déjà existants.
 	 */
 	
-	public Inscriptions reinitialiser()
+	public static Inscriptions reinitialiser()
 	{
 		inscriptions = new Inscriptions();
 		return getInscriptions();
@@ -241,24 +246,34 @@ public class Inscriptions implements Serializable
 	
 	public static void main(String[] args)
 	{
-		Inscriptions inscriptions = Inscriptions.getInscriptions();
-		Competition flechettes = inscriptions.createCompetition("Mondial de foot", LocalDate.of(2019, 12, 12), false);
-		Personne tony = inscriptions.createPersonne("Tony", "Dent de plomb", "azerty"), 
-				 boris = inscriptions.createPersonne("Boris", "le Hachoir", "ytreza");
-		flechettes.add(tony);
-		Equipe lesManouches = inscriptions.createEquipe("Les Manouches");
-		lesManouches.add(boris);
-		lesManouches.add(tony);
-		lesManouches.delete();
-		System.out.println(inscriptions);
-		try
-			{
-				inscriptions.sauvegarder();
-			} 
-			catch (IOException e)
-			{
-				System.out.println("Sauvegarde impossible." + e);
-			}
-			
-		}
+		
+		Passerelle connexion = new Passerelle();
+		connexion.open();
+		
+        Inscriptions inscriptions = Inscriptions.reinitialiser();
+        DialogueMain dial = new DialogueMain(inscriptions);
+        dial.start();
+        
+		connexion.close();
+		
+//		Inscriptions test = Inscriptions.getInscriptions();
+//		Competition flechettes = inscriptions.createCompetition("Mondial de foot", LocalDate.of(2019, 12, 12), false);
+//		Personne tony = inscriptions.createPersonne("Tony", "Dent de plomb", "azerty"), 
+//				 boris = inscriptions.createPersonne("Boris", "le Hachoir", "ytreza");
+//		flechettes.add(tony);
+//		Equipe lesManouches = inscriptions.createEquipe("Les Manouches");
+//		lesManouches.add(boris);
+//		lesManouches.add(tony);
+//		lesManouches.delete();
+//		System.out.println(inscriptions);
+//		try
+//			{
+//				inscriptions.sauvegarder();
+//			} 
+//			catch (IOException e)
+//			{
+//				System.out.println("Sauvegarde impossible." + e);
+//			}
+//			
+	}
 }
