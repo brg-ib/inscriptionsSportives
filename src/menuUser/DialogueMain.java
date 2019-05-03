@@ -1,23 +1,17 @@
 package menuUser;
 
 import java.io.IOException;
-import java.text.ParseException;
-import java.text.SimpleDateFormat;
-
+import java.time.LocalDate;
 
 import inscriptions.*;
 import java.util.ArrayList;
 
-import java.util.Date;
 import commandLineMenus.*;
-
 import commandLineMenus.rendering.examples.util.InOut;
-
 import static commandLineMenus.rendering.examples.util.InOut.*;
 
 public class DialogueMain {
 	
-	SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd");
 	
 	private Inscriptions inscriptions;
 	
@@ -104,16 +98,9 @@ public class DialogueMain {
 	// Ajouts
 	private Option ajouterCompetition()
 	{
-		 return new Option("Ajouter une compétition", "a", () -> {
-	            String dateCloture = InOut.getString("Entrer la date de clôture des inscriptions de la compétition (AAAA-MM-JJ) : ");
-				try {
-				  Date date = formatter.parse(dateCloture);
-				 // inscriptions.createCompetition(InOut.getString("nom : "), date, InOut.getInt("0 - Compétition de personnes \n1 - Compétition d'équipes : ")==1);
-				} catch (ParseException e) {
-					// TODO Auto-generated catch block
-					e.printStackTrace();
-				}
-	           });
+		return new Option("Ajouter une compétition", "a", () -> {inscriptions.createCompetition(getString("Entrez le nom de : "), 
+				LocalDate.of(getInt("Année : "), getInt("Mois : "), getInt("Jour : ")), 
+				  InOut.getInt("Choisir :\n0 - Compétition de personnes \n1 - Compétition d'équipes : ")==1);});
 	}
 	
 	private Option ajouterEquipe()
@@ -123,16 +110,14 @@ public class DialogueMain {
 	
 	private Option ajouterPersonne()
 	{
-		return new Option("Ajouter une personne", "a", () -> {inscriptions.createPersonne(getString("Entrez le nom de votre personne : \n"), 
-																						  getString("Entrez le prenom de votre personne : \n"), 
-																						  getString("Entrez le mail de votre personne : \n"));});
+		return new Option("Ajouter une personne", "a", () -> {inscriptions.createPersonne(getString("Entrez le nom de votre personne : "), 
+																						  getString("Entrez le prenom de votre personne : "), 
+																						  getString("Entrez le mail de votre personne : "));});
 	}
 
 	
 	
 	// Selections
-	
-	
 	private List<Competition> selectionnerCompetition()
 	{
 		return new List<Competition>("Sélectionner une compétition", "e", 
@@ -160,7 +145,6 @@ public class DialogueMain {
 	
 	
 	// Selectionner : Competition
-	
 	private Menu editerCompetition(Competition competition)
     {
         Menu menu = new Menu("Editer " + competition.getNom() + ((competition.inscriptionsOuvertes()) ? "" : " Inscriptions closes !"), competition.getNom(), "");
@@ -302,8 +286,6 @@ public class DialogueMain {
 	
 	// Selectionner : Personne
 	
-	
-	
 	private Menu editerPersonne(Personne personne)
 	{
 	    Menu menu = new Menu("Editer " + personne.getNom());
@@ -317,9 +299,9 @@ public class DialogueMain {
 	{
 		return new Option("Modifier une personne", "a", () -> {
 			
-			personne.setNom(getString("Nouveau nom : \n"));
-			personne.setPrenom(getString("Nouveau prenom : \n"));
-			personne.setMail(getString("Nouveau mail : \n"));
+			personne.setNom(getString("Nouveau nom : "));
+			personne.setPrenom(getString("Nouveau prenom : "));
+			personne.setMail(getString("Nouveau mail : "));
 			
 		});
 	}
