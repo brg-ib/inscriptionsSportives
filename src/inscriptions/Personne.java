@@ -91,14 +91,12 @@ public class Personne extends Candidat
 	boolean add(Equipe equipe)
 	{
 		equipes.add(equipe);
-		Passerelle.save(equipe);
 		return equipes.add(equipe);
 	}
 
 	boolean remove(Equipe equipe)
 	{
 		equipes.remove(equipe);
-		Passerelle.delete(equipe);
 		return equipes.remove(equipe);
 	}
 	
