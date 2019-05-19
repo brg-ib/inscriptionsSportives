@@ -19,12 +19,21 @@ import org.hibernate.annotations.SortNatural;
  */
 
 @Entity
+@Table(name = "competition")
 public class Competition implements Comparable<Competition>, Serializable
 {
+    @Id
+    @GeneratedValue(strategy = GenerationType.AUTO)
+    @Column(name = "id")
+    private int id;
+    
+    @Transient
 	private static final long serialVersionUID = -2882150118573759729L;
 	
 	@Transient
 	private Inscriptions inscriptions;
+	
+	@Column( name ="nom")
 	private String nom;
 	
 	@ManyToMany
@@ -33,9 +42,10 @@ public class Competition implements Comparable<Competition>, Serializable
 	private Set<Candidat> candidats;
 	
 	@Temporal(TemporalType.TIMESTAMP)
+	@Column(name = "date_cloture")
 	private LocalDate dateCloture;
 	
-	@Column(columnDefinition="tinyint(1) default 0")
+	@Column(name="en_equipe")
 	private boolean enEquipe = false;
 
 	Competition(Inscriptions inscriptions, String nom, LocalDate dateCloture, boolean enEquipe)
@@ -205,5 +215,9 @@ public class Competition implements Comparable<Competition>, Serializable
 	public String toString()
 	{
 		return getNom();
+	}
+	
+	public int getId() {
+		return id;
 	}
 }

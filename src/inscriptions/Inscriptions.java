@@ -1,18 +1,11 @@
 package inscriptions;
 
-import java.io.FileInputStream;
-import java.io.FileOutputStream;
-import java.io.IOException;
-import java.io.ObjectInputStream;
-import java.io.ObjectOutputStream;
-import java.io.Serializable;
-import java.util.Collections;
+import java.io.*;
+import java.util.*;
 import java.time.LocalDate;
-import java.util.SortedSet;
-import java.util.TreeSet;
 
-import menuUser.DialogueMain;
 import hibernate.Passerelle;
+
 /**
  * Point d'entrée dans l'application, un seul objet de type Inscription
  * permet de gérer les compétitions, candidats (de type equipe ou personne)
@@ -94,7 +87,6 @@ public class Inscriptions implements Serializable
 	{
 		Competition competition = new Competition(this, nom, date, enEquipe);
 		competitions.add(competition);
-		//Passerelle.save(competition);
 		return competition;
 	}
 
@@ -112,7 +104,6 @@ public class Inscriptions implements Serializable
 	{
 		Personne personne = new Personne(this, nom, prenom, mail);
 		candidats.add(personne);
-		//Passerelle.save(personne);
 		return personne;
 	}
 	
@@ -129,7 +120,6 @@ public class Inscriptions implements Serializable
 	{
 		Equipe equipe = new Equipe(this, nom);
 		candidats.add(equipe);
-		//Passerelle.save(equipe);
 		return equipe;
 	}
 	
@@ -246,25 +236,7 @@ public class Inscriptions implements Serializable
 	
 	public static void main(String[] args)
 	{
-		/*
-		Passerelle connexion = new Passerelle();
-		connexion.open();
-		
-        Inscriptions inscriptions = Inscriptions.reinitialiser();
-        DialogueMain dial = new DialogueMain(inscriptions);
-        dial.start();
-        
-		connexion.close();
-		*/
-//		Inscriptions test = Inscriptions.getInscriptions();
-//		Competition flechettes = inscriptions.createCompetition("Mondial de foot", LocalDate.of(2019, 12, 12), false);
-//		Personne tony = inscriptions.createPersonne("Tony", "Dent de plomb", "azerty"), 
-//				 boris = inscriptions.createPersonne("Boris", "le Hachoir", "ytreza");
-//		flechettes.add(tony);
-//		Equipe lesManouches = inscriptions.createEquipe("Les Manouches");
-//		lesManouches.add(boris);
-//		lesManouches.add(tony);
-//		lesManouches.delete();
+
 //		System.out.println(inscriptions);
 //		try
 //			{

@@ -7,10 +7,9 @@ import java.util.TreeSet;
 
 import javax.persistence.Entity;
 import javax.persistence.ManyToMany;
-
-import org.hibernate.annotations.Cascade;
-import org.hibernate.annotations.CascadeType;
-import org.hibernate.annotations.SortNatural;
+import javax.persistence.PrimaryKeyJoinColumn;
+import javax.persistence.Table;
+import javax.persistence.Transient;
 
 /**
  * Représente une Equipe. C'est-à-dire un ensemble de personnes pouvant 
@@ -19,13 +18,14 @@ import org.hibernate.annotations.SortNatural;
  */
 
 @Entity
+@Table(name="equipe")
+@PrimaryKeyJoinColumn(name = "id")
 public class Equipe extends Candidat
 {
+	@Transient
 	private static final long serialVersionUID = 4147819927233466035L;
 	
-	@ManyToMany
-	@Cascade(value = { CascadeType.ALL })
-	@SortNatural
+
 	private SortedSet<Personne> membres = new TreeSet<>();
 	
 	Equipe(Inscriptions inscriptions, String nom)

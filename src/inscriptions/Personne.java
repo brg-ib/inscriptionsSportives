@@ -1,33 +1,28 @@
 package inscriptions;
 
-import java.util.Collections;
-import java.util.Set;
-import java.util.TreeSet;
+import java.util.*;
 
-import javax.persistence.Entity;
-import javax.persistence.FetchType;
+import javax.persistence.*;
 
-import javax.persistence.OneToMany;
-
-import org.hibernate.annotations.Cascade;
-import org.hibernate.annotations.CascadeType;
-import org.hibernate.annotations.SortNatural;
-
-import hibernate.Passerelle;
 /**
  * Représente une personne physique pouvant s'inscrire à une compétition.
  */
 
 @Entity
+@Table(name="personne")
+@PrimaryKeyJoinColumn(name = "id")
 public class Personne extends Candidat
 {
+
+	@Transient
 	private static final long serialVersionUID = 4434646724271327254L;
-	private String prenom, mail;
 	
-	@OneToMany(targetEntity=Personne.class, mappedBy = "equipes", fetch=FetchType.EAGER)
-	@Cascade(value= { CascadeType.ALL })
+	@Column(name = "prenom")
+	private String prenom;
+
+	@Column(name = "mail")
+	private String mail;
 	
-	@SortNatural
 	private Set<Equipe> equipes;
 	
 	Personne(Inscriptions inscriptions, String nom, String prenom, String mail)
@@ -104,8 +99,8 @@ public class Personne extends Candidat
 	public void delete()
 	{
 		super.delete();
-		for (Equipe e : equipes)
-			e.remove(this);
+//		for (Equipe e : equipes)
+//			e.remove(this);
 	}
 	
 	@Override
