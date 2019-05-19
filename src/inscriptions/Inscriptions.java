@@ -94,7 +94,7 @@ public class Inscriptions implements Serializable
 	{
 		Competition competition = new Competition(this, nom, date, enEquipe);
 		competitions.add(competition);
-		Passerelle.save(competition);
+		//Passerelle.save(competition);
 		return competition;
 	}
 
@@ -112,7 +112,7 @@ public class Inscriptions implements Serializable
 	{
 		Personne personne = new Personne(this, nom, prenom, mail);
 		candidats.add(personne);
-		Passerelle.save(personne);
+		//Passerelle.save(personne);
 		return personne;
 	}
 	
@@ -129,7 +129,7 @@ public class Inscriptions implements Serializable
 	{
 		Equipe equipe = new Equipe(this, nom);
 		candidats.add(equipe);
-		Passerelle.save(equipe);
+		//Passerelle.save(equipe);
 		return equipe;
 	}
 	
@@ -246,7 +246,7 @@ public class Inscriptions implements Serializable
 	
 	public static void main(String[] args)
 	{
-		
+		/*
 		Passerelle connexion = new Passerelle();
 		connexion.open();
 		
@@ -255,7 +255,7 @@ public class Inscriptions implements Serializable
         dial.start();
         
 		connexion.close();
-		
+		*/
 //		Inscriptions test = Inscriptions.getInscriptions();
 //		Competition flechettes = inscriptions.createCompetition("Mondial de foot", LocalDate.of(2019, 12, 12), false);
 //		Personne tony = inscriptions.createPersonne("Tony", "Dent de plomb", "azerty"), 
