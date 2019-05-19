@@ -10,6 +10,13 @@ import commandLineMenus.*;
 import commandLineMenus.rendering.examples.util.InOut;
 import static commandLineMenus.rendering.examples.util.InOut.*;
 
+
+/**
+ * Dialogue principal utilisateur
+ * 
+ * 
+ *
+ */
 public class DialogueMain {
 	
 	
@@ -245,6 +252,7 @@ public class DialogueMain {
         menu.addBack("q");
         return menu;
     }
+	
 	
 	private Option afficherMembres(final Equipe equipe)
 	{

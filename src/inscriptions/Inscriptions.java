@@ -237,15 +237,5 @@ public class Inscriptions implements Serializable
 	public static void main(String[] args)
 	{
 
-//		System.out.println(inscriptions);
-//		try
-//			{
-//				inscriptions.sauvegarder();
-//			} 
-//			catch (IOException e)
-//			{
-//				System.out.println("Sauvegarde impossible." + e);
-//			}
-//			
 	}
 }
