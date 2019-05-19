@@ -308,7 +308,7 @@ public class DialogueMain {
 	
 	private Option supprimerPersonne(Personne personne)
 	{
-		return new Option("Supprimer une personne", "b", () -> {personne.delete();});
+		return new Option("Supprimer la personne", "b", () -> {personne.delete();});
 	}
 	
 
