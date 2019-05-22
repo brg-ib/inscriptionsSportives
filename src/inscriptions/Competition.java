@@ -41,7 +41,6 @@ public class Competition implements Comparable<Competition>, Serializable
 	@SortNatural
 	private Set<Candidat> candidats;
 	
-	@Temporal(TemporalType.TIMESTAMP)
 	@Column(name = "date_cloture")
 	private LocalDate dateCloture;
 	

@@ -23,6 +23,8 @@ public class Personne extends Candidat
 	@Column(name = "mail")
 	private String mail;
 	
+	@ManyToMany(mappedBy="membres")
+	@OrderBy("id ASC")
 	private Set<Equipe> equipes;
 	
 	Personne(Inscriptions inscriptions, String nom, String prenom, String mail)

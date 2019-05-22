@@ -31,6 +31,7 @@ public abstract class Candidat implements Comparable<Candidat>, Serializable
 	@Column (name = "nom")
 	private String nom;
 	
+	@ManyToMany(mappedBy="candidats")
 	private Set<Competition> competitions;
 	
 	Candidat(Inscriptions inscriptions, String nom)
