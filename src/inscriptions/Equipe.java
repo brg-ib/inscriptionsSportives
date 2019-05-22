@@ -1,15 +1,8 @@
 package inscriptions;
 
-import java.util.Collections;
-import java.util.Set;
-import java.util.SortedSet;
-import java.util.TreeSet;
+import java.util.*;
 
-import javax.persistence.Entity;
-import javax.persistence.ManyToMany;
-import javax.persistence.PrimaryKeyJoinColumn;
-import javax.persistence.Table;
-import javax.persistence.Transient;
+import javax.persistence.*;
 
 /**
  * Représente une Equipe. C'est-à-dire un ensemble de personnes pouvant 
@@ -25,7 +18,7 @@ public class Equipe extends Candidat
 	@Transient
 	private static final long serialVersionUID = 4147819927233466035L;
 	
-
+	
 	private SortedSet<Personne> membres = new TreeSet<>();
 	
 	Equipe(Inscriptions inscriptions, String nom)

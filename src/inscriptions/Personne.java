@@ -99,8 +99,8 @@ public class Personne extends Candidat
 	public void delete()
 	{
 		super.delete();
-//		for (Equipe e : equipes)
-//			e.remove(this);
+		for (Equipe e : equipes)
+			e.remove(this);
 	}
 	
 	@Override
