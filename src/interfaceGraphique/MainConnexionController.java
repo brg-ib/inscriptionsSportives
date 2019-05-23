@@ -1,13 +1,10 @@
 package interfaceGraphique;
 
-import java.awt.Button;
 import java.awt.TextField;
 import java.awt.event.ActionEvent;
-import java.awt.event.MouseEvent;
 import java.net.*;
 import java.util.*;
 
-import com.sun.xml.internal.ws.org.objectweb.asm.Label;
 import com.sun.xml.internal.ws.policy.privateutil.PolicyUtils.Text;
 
 import javafx.fxml.FXML;

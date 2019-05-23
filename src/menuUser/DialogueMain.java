@@ -60,6 +60,7 @@ public class DialogueMain {
 		menu.add(afficherCompetitions());
 		menu.add(ajouterCompetition());
 		menu.add(selectionnerCompetition());
+		menu.add(sauvegarder());
 		menu.addBack("q");
 		return menu;
 	}
@@ -70,6 +71,7 @@ public class DialogueMain {
 		menu.add(afficherEquipes());
 		menu.add(ajouterEquipe());
 		menu.add(selectionnerEquipe());
+		menu.add(sauvegarder());
 		menu.addBack("q");
 		return menu;
 	}
@@ -80,6 +82,7 @@ public class DialogueMain {
 		menu.add(afficherPersonnes());
 		menu.add(ajouterPersonne());
 		menu.add(selectionnerPersonne());
+		menu.add(sauvegarder());
 		menu.addBack("q");
 		return menu;
 	}
@@ -166,8 +169,10 @@ public class DialogueMain {
         } 
         	
         menu.add(supprimerCandidat(competition));
-        menu.add(modifierCompetition(competition));
+        menu.add(modifierNomCompetition(competition));
+        menu.add(modifierDateCompetition(competition));
         menu.add(supprimerCompetition(competition));
+        menu.add(sauvegarder());
         menu.addBack("q");
         return menu;
     }
@@ -218,20 +223,26 @@ public class DialogueMain {
 				);
 	}
 	
-	private Option modifierCompetition(final Competition competition)
+	private Option modifierNomCompetition(final Competition competition)
 	{
-		return new Option("modifier une compétition", "c", 
+		return new Option("modifier le nom de la compétition", "c", 
 				() -> 
 				{
 					competition.setNom(getString("Nouveau nom : \n"));
-					competition.setDateCloture(competition.getDateCloture());
 				}
 		);
 	}
 	
+	private Option modifierDateCompetition(final Competition competition)
+	{
+		return new Option("modifier la date de la compétition", "md", 
+				() -> 
+		{competition.setDateCloture(LocalDate.of(getInt("Année : "), getInt("Mois : "), getInt("Jour : ")));});
+	}
+	
 	private Option supprimerCompetition(final Competition competition)
 	{
-		return new Option("Supprimer une compétition", "d", 
+		return new Option("Supprimer la compétition", "d", 
 				() -> 
 				{
 					competition.delete();
@@ -249,6 +260,7 @@ public class DialogueMain {
         menu.add(ajouterMembre(equipe));
         menu.add(supprimerMembre(equipe));
         menu.add(supprimerEquipe(equipe));
+        menu.add(sauvegarder());
         menu.addBack("q");
         return menu;
     }
@@ -299,6 +311,7 @@ public class DialogueMain {
 	    Menu menu = new Menu("Editer " + personne.getNom());
 	    menu.add(modifierPersonne(personne));
         menu.add(supprimerPersonne(personne));
+        menu.add(sauvegarder());
 	    menu.addBack("q");
 	    return menu;
 	}
@@ -349,6 +362,26 @@ public class DialogueMain {
 		return new Option("Quitter sans enregistrer", "a", Action.QUIT);
 	}
 	
+	//Sauvegarder 
+	private Option sauvegarder()
+    {
+        return new Option("Sauvegarder", "x", 
+                () -> 
+                {
+                    try
+                    {
+    					System.out.print("Sauvegarde en cours...");
+                        inscriptions.sauvegarder();
+    					System.out.println("réussie.");
+
+                    } 
+                    catch (IOException e)
+                    {
+                        System.out.println("Impossible d'effectuer une sauvegarde");
+                    }
+                }
+            );
+    }
 	
 	
 	// Main 

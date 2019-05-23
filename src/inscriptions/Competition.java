@@ -83,7 +83,7 @@ public class Competition implements Comparable<Competition>, Serializable
 	
 	public boolean inscriptionsOuvertes()
 	{
-		// TODO retourner vrai si et seulement si la date système est antérieure à la date de clôture.
+		// retourner vrai si et seulement si la date système est antérieure à la date de clôture.
 		return getDateCloture().isAfter(LocalDate.now());
 	}
 	
@@ -115,11 +115,11 @@ public class Competition implements Comparable<Competition>, Serializable
 	
 	public void setDateCloture(LocalDate dateCloture)
 	{
-		// TODO vérifier que l'on avance pas la date.
-		if (getDateCloture().isBefore(dateCloture))
+		// vérifier que l'on avance pas la date.
+		if (dateCloture.isAfter(getDateCloture()) || dateCloture.equals(getDateCloture()))
 			this.dateCloture = dateCloture;
 		else
-			throw new RuntimeException("Impossible d'avancer la date.");
+			throw new RuntimeException("Impossible de changer la date de cloture.");
 	}
 	
 	/**
@@ -142,7 +142,7 @@ public class Competition implements Comparable<Competition>, Serializable
 	
 	public boolean add(Personne personne)
 	{
-		// TODO vérifier que la date de clôture n'est pas passée
+		// vérifier que la date de clôture n'est pas passée
 		if (enEquipe || ! inscriptionsOuvertes())
 			throw new RuntimeException("Impossbile d'ajouter une personne.");
 		personne.add(this);
@@ -159,7 +159,7 @@ public class Competition implements Comparable<Competition>, Serializable
 
 	public boolean add(Equipe equipe)
 	{
-		// TODO vérifier que la date de clôture n'est pas passée
+		// vérifier que la date de clôture n'est pas passée
 		if (!enEquipe || !inscriptionsOuvertes())
 			throw new RuntimeException("Impossible d'ajouter une equipe.");
 		equipe.add(this);
@@ -173,7 +173,7 @@ public class Competition implements Comparable<Competition>, Serializable
 	
 	public Set<Candidat> getCandidatsAInscrire()
 	{
-		// TODO les candidats que l'on peut inscrire à cette compétition.
+		// les candidats que l'on peut inscrire à cette compétition.
 		Set<Candidat> CandidatsAInscrire = new TreeSet<>();
 		for (Candidat candidats : inscriptions.getCandidats())
 			if (!(getCandidats()).contains(candidats))

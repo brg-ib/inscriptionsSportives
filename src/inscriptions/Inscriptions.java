@@ -2,9 +2,8 @@ package inscriptions;
 
 import java.io.*;
 import java.util.*;
-import java.time.LocalDate;
 
-import hibernate.Passerelle;
+import java.time.LocalDate;
 
 /**
  * Point d'entrée dans l'application, un seul objet de type Inscription
@@ -86,7 +85,15 @@ public class Inscriptions implements Serializable
 			LocalDate date, boolean enEquipe)
 	{
 		Competition competition = new Competition(this, nom, date, enEquipe);
-		competitions.add(competition);
+		 try
+         {
+			 if(date.isBefore(LocalDate.now()))
+					competitions.add(competition);
+         } 
+         catch (Exception e)
+         {
+             System.out.println("Impossible d'effectuer la sauvegarde");
+         }
 		return competition;
 	}
 
