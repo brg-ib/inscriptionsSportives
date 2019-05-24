@@ -17,12 +17,12 @@ import static commandLineMenus.rendering.examples.util.InOut.*;
  * 
  *
  */
-public class DialogueMain {
+public class Dialogue {
 	
 	
 	private Inscriptions inscriptions;
 	
-	public DialogueMain(Inscriptions inscriptions)
+	public Dialogue(Inscriptions inscriptions)
 	{
 		this.inscriptions = inscriptions;
 	}
@@ -384,11 +384,5 @@ public class DialogueMain {
     }
 	
 	
-	// Main 
-	public static void main(String[] args)
-    {
-        Inscriptions inscriptions = Inscriptions.getInscriptions();
-        DialogueMain dial = new DialogueMain(inscriptions);
-        dial.start();
-    }
+	
 }
