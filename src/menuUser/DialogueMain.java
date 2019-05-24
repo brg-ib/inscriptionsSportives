@@ -268,7 +268,7 @@ public class DialogueMain {
 	
 	private Option afficherMembres(final Equipe equipe)
 	{
-		return new Option("Afficher l'équipe", "a", 
+		return new Option("Afficher les membres", "a", 
 				() -> 
 				{
 					System.out.println(equipe.getMembres());

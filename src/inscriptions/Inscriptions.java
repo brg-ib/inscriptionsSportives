@@ -85,28 +85,18 @@ public class Inscriptions implements Serializable
 			LocalDate date, boolean enEquipe)
 	{
 		Competition competition = new Competition(this, nom, date, enEquipe);
-		 try
-         {
-			 if(date.isBefore(LocalDate.now()))
-					competitions.add(competition);
-         } 
-         catch (Exception e)
-         {
-             System.out.println("Impossible d'effectuer la sauvegarde");
-         }
+		competitions.add(competition);
 		return competition;
 	}
 
 	/**
 	 * Créée un Candidat de type Personne. Ceci est le seul moyen, il n'y a pas
 	 * de constructeur public dans {@link Personne}.
-
 	 * @param nom
 	 * @param prenom
 	 * @param mail
 	 * @return
 	 */
-	
 	public Personne createPersonne(String nom, String prenom, String mail)
 	{
 		Personne personne = new Personne(this, nom, prenom, mail);
