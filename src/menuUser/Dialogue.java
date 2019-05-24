@@ -12,8 +12,8 @@ import static commandLineMenus.rendering.examples.util.InOut.*;
 
 
 /**
- * Dialogue principal utilisateur
- * 
+ * Dialogue utilisateur 
+ * CommandLine
  * 
  *
  */
@@ -153,8 +153,11 @@ public class Dialogue {
 	}
 	
 	
-	
-	// Selectionner : Competition
+	/**
+	 * 
+	 * @param competition
+	 * @return
+	 */
 	private Menu editerCompetition(Competition competition)
     {
         Menu menu = new Menu("Editer " + competition.getNom() + ((competition.inscriptionsOuvertes()) ? "" : " Inscriptions closes !"), competition.getNom(), "");
@@ -201,7 +204,7 @@ public class Dialogue {
 	
 	private List<Candidat> ajouterPersonneCompetition(final Competition competition)
 	{
-		return new List<>("Ajouter une personne dans la compétition", "m", 
+		return new List<>("Ajouter un candidat dans la compétition", "m", 
 				() -> new ArrayList<>(inscriptions.getPersonnes()),
 				(index, element) -> {competition.add((Personne) element);}
 				);
@@ -246,6 +249,7 @@ public class Dialogue {
 				() -> 
 				{
 					competition.delete();
+					
 				}
 		);
 	}
@@ -362,7 +366,11 @@ public class Dialogue {
 		return new Option("Quitter sans enregistrer", "a", Action.QUIT);
 	}
 	
-	//Sauvegarder 
+
+	/**
+	 * Sauvegarder 
+	 * @return
+	 */
 	private Option sauvegarder()
     {
         return new Option("Sauvegarder", "x", 
