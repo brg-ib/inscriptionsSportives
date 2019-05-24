@@ -12,13 +12,22 @@ import javax.persistence.*;
 
 @Entity
 @Table(name="equipe")
-@PrimaryKeyJoinColumn(name = "id")
 public class Equipe extends Candidat
 {
 	@Transient
 	private static final long serialVersionUID = 4147819927233466035L;
 	
-	
+    /*
+     * Clés plusieurs à plusieurs sur la table participer
+     */
+	@ManyToMany(fetch = FetchType.LAZY,
+            cascade =
+            {
+            		CascadeType.DETACH
+            })
+    @JoinTable(name = "appartenir", joinColumns = {
+        @JoinColumn(name = "id_eq")}, inverseJoinColumns = {
+        @JoinColumn(name = "id_ca")})
 	private SortedSet<Personne> membres = new TreeSet<>();
 	
 	Equipe(Inscriptions inscriptions, String nom)

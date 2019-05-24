@@ -10,7 +10,7 @@ import javax.persistence.*;
 
 @Entity
 @Table(name="personne")
-@PrimaryKeyJoinColumn(name = "id")
+
 public class Personne extends Candidat
 {
 
@@ -23,10 +23,27 @@ public class Personne extends Candidat
 	@Column(name = "mail")
 	private String mail;
 	
-	@ManyToMany(mappedBy="membres")
-	@OrderBy("id ASC")
+    /*
+     * Clés plusieurs à plusieurs sur la table participer
+     */
+    @ManyToMany(fetch = FetchType.LAZY,
+            cascade =
+            {
+            		CascadeType.DETACH
+            })
+    @JoinTable(name = "appartenir", joinColumns = {
+        @JoinColumn(name = "id_ca")}, inverseJoinColumns = {
+        @JoinColumn(name = "id_eq")})
 	private Set<Equipe> equipes;
 	
+    /**
+     * Constructeur
+     * 
+     * @param inscriptions
+     * @param nom
+     * @param prenom
+     * @param mail
+     */
 	Personne(Inscriptions inscriptions, String nom, String prenom, String mail)
 	{
 		super(inscriptions, nom);

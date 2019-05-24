@@ -7,12 +7,14 @@ import java.util.Set;
 import java.util.TreeSet;
 
 import javax.persistence.*;
-
+import javax.persistence.CascadeType;
 import org.hibernate.annotations.Cascade;
-import org.hibernate.annotations.CascadeType;
 import org.hibernate.annotations.SortNatural;
 
+import hibernate.Passerelle;
+
 /**
+ * Couche métier des compétitions;
  * Représente une compétition, c'est-à-dire un ensemble de candidats 
  * inscrits à un événement, les inscriptions sont closes à la date dateCloture.
  *
@@ -24,8 +26,8 @@ public class Competition implements Comparable<Competition>, Serializable
 {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-    @Column(name = "id")
-    private int id;
+    @Column(name = "id_co")
+    private int id_co;
     
     @Transient
 	private static final long serialVersionUID = -2882150118573759729L;
@@ -36,12 +38,18 @@ public class Competition implements Comparable<Competition>, Serializable
 	@Column( name ="nom")
 	private String nom;
 	
-	@ManyToMany
-	@Cascade(value = { CascadeType.ALL })
-	@SortNatural
+	 @ManyToMany(fetch = FetchType.LAZY,
+	            cascade
+	            = {
+	                CascadeType.DETACH
+	            })
+	    @JoinTable(name = "inscrire", joinColumns = {
+	        @JoinColumn(name = "id_co")}, inverseJoinColumns = {
+	        @JoinColumn(name = "id_ca")})
 	private Set<Candidat> candidats;
 	
 	@Column(name = "date_cloture")
+    @Temporal(javax.persistence.TemporalType.DATE)
 	private LocalDate dateCloture;
 	
 	@Column(name="en_equipe")
@@ -129,6 +137,7 @@ public class Competition implements Comparable<Competition>, Serializable
 	
 	public Set<Candidat> getCandidats()
 	{
+		Passerelle.getData("candidat");
 		return Collections.unmodifiableSet(candidats);
 	}
 	
@@ -190,6 +199,7 @@ public class Competition implements Comparable<Competition>, Serializable
 	public boolean remove(Candidat candidat)
 	{
 		candidat.remove(this);
+		Passerelle.delete(candidat);;
 		return candidats.remove(candidat);
 	}
 	
@@ -201,6 +211,7 @@ public class Competition implements Comparable<Competition>, Serializable
 	{
 		for (Candidat candidat : candidats)
 			candidat.remove(this);
+		Passerelle.delete(this);
 		inscriptions.delete(this);	
 	}
 	
@@ -217,6 +228,6 @@ public class Competition implements Comparable<Competition>, Serializable
 	}
 	
 	public int getId() {
-		return id;
+		return id_co;
 	}
 }

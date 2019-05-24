@@ -5,23 +5,28 @@ import java.util.*;
 
 import java.time.LocalDate;
 
+import hibernate.Passerelle;;
+
 /**
  * Point d'entrée dans l'application, un seul objet de type Inscription
  * permet de gérer les compétitions, candidats (de type equipe ou personne)
  * ainsi que d'inscrire des candidats à des compétition.
  */
-
 public class Inscriptions implements Serializable
 {
 	private static final long serialVersionUID = -3095339436048473524L;
 	private static final String FILE_NAME = "Inscriptions.srz";
 	private static Inscriptions inscriptions;
 	
+	private Passerelle gate; 
+	
 	private SortedSet<Competition> competitions = new TreeSet<>();
 	private SortedSet<Candidat> candidats = new TreeSet<>();
 
+	
 	private Inscriptions()
 	{
+		gate.open();
 	}
 	
 	/**
@@ -86,6 +91,7 @@ public class Inscriptions implements Serializable
 	{
 		Competition competition = new Competition(this, nom, date, enEquipe);
 		competitions.add(competition);
+		//sauvegarder(competition);
 		return competition;
 	}
 
@@ -101,6 +107,7 @@ public class Inscriptions implements Serializable
 	{
 		Personne personne = new Personne(this, nom, prenom, mail);
 		candidats.add(personne);
+		sauvegarder(personne);
 		return personne;
 	}
 	
@@ -117,14 +124,22 @@ public class Inscriptions implements Serializable
 	{
 		Equipe equipe = new Equipe(this, nom);
 		candidats.add(equipe);
+		sauvegarder(equipe);
 		return equipe;
 	}
 	
+	/**
+	 * 
+	 * @param competition
+	 */
 	void delete(Competition competition)
 	{
 		competitions.remove(competition);
 	}
-	
+	/**
+	 * 
+	 * @param candidat
+	 */
 	void delete(Candidat candidat)
 	{
 		candidats.remove(candidat);
@@ -222,6 +237,22 @@ public class Inscriptions implements Serializable
 			} 
 			catch (IOException e){}
 		}
+	}
+	
+	/**
+	 * Sauvegarder vers la base de donnée
+	 * @param o
+	 */
+	public void sauvegarder(Object o) {
+		gate.save(o);
+	}
+	
+	/**
+	 * 
+	 * @param o
+	 */
+	public void effacer(Object o) {
+		gate.delete(o);
 	}
 	
 	@Override

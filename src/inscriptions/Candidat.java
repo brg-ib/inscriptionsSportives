@@ -7,6 +7,7 @@ import java.util.TreeSet;
 
 import javax.persistence.*;
 
+import hibernate.Passerelle;
 /**
  * Candidat à un événement sportif, soit une personne physique, soit une équipe.
  *
@@ -14,14 +15,14 @@ import javax.persistence.*;
 
 @Entity
 @Table(name = "candidat")
-@Inheritance(strategy=InheritanceType.JOINED) //gere lheritage
+@Inheritance(strategy=InheritanceType.JOINED) //gere l'heritage
 public abstract class Candidat implements Comparable<Candidat>, Serializable
 {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-    @Column(name = "id", nullable = false)
-    private int id;
-	
+    @Column(name = "id_ca", nullable = false)
+    private int id_ca;
+
 	@Transient
 	private static final long serialVersionUID = -6035399822298694746L;
 	
@@ -31,8 +32,23 @@ public abstract class Candidat implements Comparable<Candidat>, Serializable
 	@Column (name = "nom")
 	private String nom;
 	
-	@ManyToMany(mappedBy="candidats")
-	private Set<Competition> competitions;
+	
+    /**
+     * Clés plusieurs à plusieurs sur la table inscrire
+     **/
+	@ManyToMany(fetch = FetchType.LAZY,
+	            cascade
+	            = {
+	                CascadeType.DETACH
+	            })
+	    @JoinTable(name = "inscrire", joinColumns = {
+	        @JoinColumn(name = "id_ca")}, inverseJoinColumns = {
+	        @JoinColumn(name = "id_co")})
+	/**
+     * Crée une liste de toutes les compétitions auxquelles le candidat est inscrit
+     **/
+	 private Set<Competition> competitions;
+	
 	
 	Candidat(Inscriptions inscriptions, String nom)
 	{
@@ -90,6 +106,7 @@ public abstract class Candidat implements Comparable<Candidat>, Serializable
 		for (Competition c : competitions)
 			c.remove(this);
 		inscriptions.delete(this);
+		Passerelle.delete(this);
 	}
 	
 	@Override
@@ -105,6 +122,7 @@ public abstract class Candidat implements Comparable<Candidat>, Serializable
 	}
 	
 	public int getId() {
-		return id;
+		return id_ca;
 	}
+	
 }
