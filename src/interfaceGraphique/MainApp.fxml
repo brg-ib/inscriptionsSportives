@@ -1,6 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import javafx.scene.control.Button?>
 <?import javafx.scene.control.PasswordField?>
 <?import javafx.scene.control.TextField?>
 <?import javafx.scene.image.Image?>
@@ -12,7 +11,7 @@
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/10.0.1" xmlns:fx="http://javafx.com/fxml/1">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/10.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="interfaceGraphique.MainAppController">
    <children>
       <GridPane prefHeight="400.0" prefWidth="600.0">
         <columnConstraints>
@@ -56,13 +55,13 @@
                         <Font name="Baloo Paaji" size="26.0" />
                      </font>
                   </Text>
-                  <ImageView fx:id="btnLogin" fitHeight="33.0" fitWidth="137.0" layoutX="82.0" layoutY="269.0" pickOnBounds="true" preserveRatio="true">
+                  <ImageView fx:id="btnLogin" fitHeight="33.0" fitWidth="137.0" layoutX="82.0" layoutY="269.0" onMouseClicked="#btnLoginAction" pickOnBounds="true" preserveRatio="true">
                      <image>
                         <Image url="@../../ressources/bouton-connexion-png-3.png" />
                      </image>
                   </ImageView>
                   <PasswordField fx:id="txtPassword" layoutX="86.0" layoutY="208.0" promptText="Mot de passe" />
-                  <Text fx:id="txtConnect" layoutX="64.0" layoutY="107.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Veuillez vous connecter d'abord" wrappingWidth="172.86442279815674" />
+                  <Text fx:id="txtConnect" layoutX="64.0" layoutY="107.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Veuillez vous connecter d'abord" textAlignment="CENTER" wrappingWidth="172.86442279815674" />
                </children>
             </AnchorPane>
          </children>
