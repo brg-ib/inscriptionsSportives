@@ -48,7 +48,6 @@ public class Competition implements Comparable<Competition>, Serializable
 	private Set<Candidat> candidats;
 	
 	@Column(name = "date_cloture")
-    @Temporal(javax.persistence.TemporalType.DATE)
 	private LocalDate dateCloture;
 	
 	@Column(name="en_equipe")

@@ -28,6 +28,7 @@ public class Equipe extends Candidat
     @JoinTable(name = "appartenir", joinColumns = {
         @JoinColumn(name = "id_eq")}, inverseJoinColumns = {
         @JoinColumn(name = "id_ca")})
+    @OrderBy("id_ca ASC")
 	private SortedSet<Personne> membres = new TreeSet<>();
 	
 	Equipe(Inscriptions inscriptions, String nom)
@@ -38,7 +39,6 @@ public class Equipe extends Candidat
 	/**
 	 * Retourne l'ensemble des personnes formant l'équipe.
 	 */
-	
 	public SortedSet<Personne> getMembres()
 	{
 		return Collections.unmodifiableSortedSet(membres);

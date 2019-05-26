@@ -20,7 +20,7 @@
 
   <mapping class="inscriptions.Candidat" />
   <mapping class="inscriptions.Competition"/>
-  <mapping class="inscriptions.Users"/> 
+  <mapping class="inscriptions.Personne"/> 
   <mapping class="inscriptions.Equipe"/> 
         
  </session-factory>
