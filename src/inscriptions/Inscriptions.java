@@ -17,16 +17,14 @@ public class Inscriptions implements Serializable
 	private static final long serialVersionUID = -3095339436048473524L;
 	private static final String FILE_NAME = "Inscriptions.srz";
 	private static Inscriptions inscriptions;
-	
-	private Passerelle gate; 
-	
+		
 	private SortedSet<Competition> competitions = new TreeSet<>();
 	private SortedSet<Candidat> candidats = new TreeSet<>();
 
 	
 	private Inscriptions()
 	{
-		gate.open();
+		Passerelle.open();
 	}
 	
 	/**
@@ -91,7 +89,7 @@ public class Inscriptions implements Serializable
 	{
 		Competition competition = new Competition(this, nom, date, enEquipe);
 		competitions.add(competition);
-		//sauvegarder(competition);
+		Passerelle.save(competition);
 		return competition;
 	}
 
@@ -107,7 +105,7 @@ public class Inscriptions implements Serializable
 	{
 		Personne personne = new Personne(this, nom, prenom, mail);
 		candidats.add(personne);
-		sauvegarder(personne);
+		Passerelle.save(personne);
 		return personne;
 	}
 	
@@ -124,7 +122,7 @@ public class Inscriptions implements Serializable
 	{
 		Equipe equipe = new Equipe(this, nom);
 		candidats.add(equipe);
-		sauvegarder(equipe);
+		Passerelle.save(equipe);
 		return equipe;
 	}
 	
@@ -237,22 +235,6 @@ public class Inscriptions implements Serializable
 			} 
 			catch (IOException e){}
 		}
-	}
-	
-	/**
-	 * Sauvegarder vers la base de donnée
-	 * @param o
-	 */
-	public void sauvegarder(Object o) {
-		gate.save(o);
-	}
-	
-	/**
-	 * 
-	 * @param o
-	 */
-	public void effacer(Object o) {
-		gate.delete(o);
 	}
 	
 	@Override

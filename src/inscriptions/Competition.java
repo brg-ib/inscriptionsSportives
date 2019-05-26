@@ -8,8 +8,7 @@ import java.util.TreeSet;
 
 import javax.persistence.*;
 import javax.persistence.CascadeType;
-import org.hibernate.annotations.Cascade;
-import org.hibernate.annotations.SortNatural;
+
 
 import hibernate.Passerelle;
 
