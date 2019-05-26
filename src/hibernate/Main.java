@@ -7,10 +7,13 @@ import hibernate.Passerelle;
 public class Main{ 
 	
 	public static void main(String[] args) {
-			
-			Passerelle.initHibernate();
-	        Inscriptions inscriptions = Inscriptions.getInscriptions();
-	        Dialogue dial = new Dialogue(inscriptions);
-	        dial.start();
+		Passerelle.initHibernate();
+		Passerelle.open();
+		
+	    Inscriptions inscriptions = Inscriptions.getInscriptions();
+	    Dialogue dial = new Dialogue(inscriptions);
+	    dial.start();
+	    
+	    Passerelle.close();
 	}
 }

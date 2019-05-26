@@ -5,10 +5,7 @@ import java.util.Collections;
 import java.time.LocalDate;
 import java.util.Set;
 import java.util.TreeSet;
-
 import javax.persistence.*;
-import javax.persistence.CascadeType;
-
 
 import hibernate.Passerelle;
 

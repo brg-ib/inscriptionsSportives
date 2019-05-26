@@ -13,15 +13,12 @@ import org.hibernate.cfg.Configuration;
 import org.hibernate.service.ServiceRegistry;
 
 
-import inscriptions.*;
-
 public class Passerelle
 {
 	private static Session session = null;
 	private static SessionFactory sessionFactory = null;
 	private static final String CONF_FILE = "hibernate/config.cfg.xml";
 	private static Transaction transaction = null;
-	private static Inscriptions inscriptions = Inscriptions.getInscriptions();
 
 	static void initHibernate()
 	{

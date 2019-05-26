@@ -24,7 +24,6 @@ public class Inscriptions implements Serializable
 	
 	private Inscriptions()
 	{
-		Passerelle.open();
 	}
 	
 	/**
@@ -89,6 +88,7 @@ public class Inscriptions implements Serializable
 	{
 		Competition competition = new Competition(this, nom, date, enEquipe);
 		competitions.add(competition);
+		sauvegarder(competition);
 		return competition;
 	}
 
@@ -104,7 +104,7 @@ public class Inscriptions implements Serializable
 	{
 		Personne personne = new Personne(this, nom, prenom, mail);
 		candidats.add(personne);
-		Passerelle.save(personne);
+		sauvegarder(personne);
 		return personne;
 	}
 	
@@ -121,6 +121,7 @@ public class Inscriptions implements Serializable
 	{
 		Equipe equipe = new Equipe(this, nom);
 		candidats.add(equipe);
+		sauvegarder(equipe);
 		return equipe;
 	}
 	
@@ -235,6 +236,11 @@ public class Inscriptions implements Serializable
 		}
 	}
 	
+	
+	public void sauvegarder(Object o) {
+		Passerelle.save(o);
+	}
+	
 	@Override
 	public String toString()
 	{
@@ -244,13 +250,6 @@ public class Inscriptions implements Serializable
 	
 	public static void main(String[] args)
 	{
-		Inscriptions in = new Inscriptions();
-		in.createEquipe("OM");
-		try {
-			in.sauvegarder();
-		} catch (IOException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
+		
 	}
 }
