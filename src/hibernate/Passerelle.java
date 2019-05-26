@@ -12,13 +12,17 @@ import org.hibernate.boot.registry.StandardServiceRegistryBuilder;
 import org.hibernate.cfg.Configuration;
 import org.hibernate.service.ServiceRegistry;
 
+
+import inscriptions.*;
+
 public class Passerelle
 {
 	private static Session session = null;
 	private static SessionFactory sessionFactory = null;
 	private static final String CONF_FILE = "hibernate/config.cfg.xml";
 	private static Transaction transaction = null;
-	
+	private static Inscriptions inscriptions = Inscriptions.getInscriptions();
+
 	static void initHibernate()
 	{
 		try
@@ -35,6 +39,7 @@ public class Passerelle
 					+ ex.getMessage(), ex);
 		}		
 	}
+	
 	
 	public static void open()
 	{
@@ -68,6 +73,14 @@ public class Passerelle
 	{
 		Transaction tx = session.beginTransaction();
 		session.save(o);
+		tx.commit();
+		session.flush();
+	}
+
+	public static void update(Object o)
+	{
+		Transaction tx = session.beginTransaction();
+		session.update(o);
 		tx.commit();
 		session.flush();
 	}

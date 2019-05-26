@@ -89,7 +89,6 @@ public class Inscriptions implements Serializable
 	{
 		Competition competition = new Competition(this, nom, date, enEquipe);
 		competitions.add(competition);
-		Passerelle.save(competition);
 		return competition;
 	}
 
@@ -122,7 +121,6 @@ public class Inscriptions implements Serializable
 	{
 		Equipe equipe = new Equipe(this, nom);
 		candidats.add(equipe);
-		Passerelle.save(equipe);
 		return equipe;
 	}
 	
@@ -246,6 +244,13 @@ public class Inscriptions implements Serializable
 	
 	public static void main(String[] args)
 	{
-
+		Inscriptions in = new Inscriptions();
+		in.createEquipe("OM");
+		try {
+			in.sauvegarder();
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 	}
 }
