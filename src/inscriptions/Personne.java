@@ -4,6 +4,8 @@ import java.util.*;
 
 import javax.persistence.*;
 
+import hibernate.Passerelle;
+
 /**
  * Représente une personne physique pouvant s'inscrire à une compétition.
  */
@@ -105,12 +107,14 @@ public class Personne extends Candidat
 	boolean add(Equipe equipe)
 	{
 		equipes.add(equipe);
+		Passerelle.save(equipe);
 		return equipes.add(equipe);
 	}
 
 	boolean remove(Equipe equipe)
 	{
 		equipes.remove(equipe);
+		Passerelle.save(equipe);
 		return equipes.remove(equipe);
 	}
 	

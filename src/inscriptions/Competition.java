@@ -7,6 +7,8 @@ import java.util.Set;
 import java.util.TreeSet;
 import javax.persistence.*;
 
+import inscriptions.Inscriptions;
+
 import hibernate.Passerelle;
 
 /**
@@ -132,7 +134,7 @@ public class Competition implements Comparable<Competition>, Serializable
 	
 	public Set<Candidat> getCandidats()
 	{
-		Passerelle.getData("candidat");
+		//Passerelle.getData("candidat");
 		return Collections.unmodifiableSet(candidats);
 	}
 	
@@ -167,6 +169,7 @@ public class Competition implements Comparable<Competition>, Serializable
 		if (!enEquipe || !inscriptionsOuvertes())
 			throw new RuntimeException("Impossible d'ajouter une equipe.");
 		equipe.add(this);
+		Passerelle.save(equipe);
 		return candidats.add(equipe);
 	}
 	
@@ -194,7 +197,7 @@ public class Competition implements Comparable<Competition>, Serializable
 	public boolean remove(Candidat candidat)
 	{
 		candidat.remove(this);
-		Passerelle.delete(candidat);;
+		Passerelle.delete(candidat);
 		return candidats.remove(candidat);
 	}
 	

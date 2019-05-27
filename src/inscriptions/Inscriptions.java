@@ -33,6 +33,7 @@ public class Inscriptions implements Serializable
 	
 	public SortedSet<Competition> getCompetitions()
 	{
+		//Passerelle.getData("competition");
 		return Collections.unmodifiableSortedSet(competitions);
 	}
 	
@@ -43,6 +44,7 @@ public class Inscriptions implements Serializable
 	
 	public SortedSet<Candidat> getCandidats()
 	{
+		//Passerelle.getData("candidat");
 		return Collections.unmodifiableSortedSet(candidats);
 	}
 
@@ -57,6 +59,7 @@ public class Inscriptions implements Serializable
 		for (Candidat c : getCandidats())
 			if (c instanceof Personne)
 				personnes.add((Personne)c);
+		//Passerelle.getData("personne");
 		return Collections.unmodifiableSortedSet(personnes);
 	}
 
@@ -71,6 +74,7 @@ public class Inscriptions implements Serializable
 		for (Candidat c : getCandidats())
 			if (c instanceof Equipe)
 				equipes.add((Equipe)c);
+		//Passerelle.getData("equipe");
 		return Collections.unmodifiableSortedSet(equipes);
 	}
 
@@ -100,6 +104,7 @@ public class Inscriptions implements Serializable
 	 * @param mail
 	 * @return
 	 */
+	
 	public Personne createPersonne(String nom, String prenom, String mail)
 	{
 		Personne personne = new Personne(this, nom, prenom, mail);
@@ -129,6 +134,7 @@ public class Inscriptions implements Serializable
 	 * 
 	 * @param competition
 	 */
+	
 	void delete(Competition competition)
 	{
 		competitions.remove(competition);
@@ -137,6 +143,7 @@ public class Inscriptions implements Serializable
 	 * 
 	 * @param candidat
 	 */
+	
 	void delete(Candidat candidat)
 	{
 		candidats.remove(candidat);

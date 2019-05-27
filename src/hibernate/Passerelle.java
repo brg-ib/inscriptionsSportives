@@ -12,7 +12,6 @@ import org.hibernate.boot.registry.StandardServiceRegistryBuilder;
 import org.hibernate.cfg.Configuration;
 import org.hibernate.service.ServiceRegistry;
 
-
 public class Passerelle
 {
 	private static Session session = null;
@@ -65,7 +64,7 @@ public class Passerelle
 		transaction = null;
 		session.flush();
 	}
-
+	
 	public static void save(Object o)
 	{
 		Transaction tx = session.beginTransaction();
@@ -73,7 +72,7 @@ public class Passerelle
 		tx.commit();
 		session.flush();
 	}
-
+	
 	public static void update(Object o)
 	{
 		Transaction tx = session.beginTransaction();
