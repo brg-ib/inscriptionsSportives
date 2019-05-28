@@ -52,6 +52,10 @@ public class Competition implements Comparable<Competition>, Serializable
 	@Column(name="en_equipe")
 	private boolean enEquipe = false;
 
+	
+	@SuppressWarnings("unused")
+	Competition(){}
+	
 	Competition(Inscriptions inscriptions, String nom, LocalDate dateCloture, boolean enEquipe)
 	{
 		this.enEquipe = enEquipe;
@@ -169,7 +173,7 @@ public class Competition implements Comparable<Competition>, Serializable
 		if (!enEquipe || !inscriptionsOuvertes())
 			throw new RuntimeException("Impossible d'ajouter une equipe.");
 		equipe.add(this);
-		Passerelle.save(equipe);
+		//Passerelle.save(equipe);
 		return candidats.add(equipe);
 	}
 	
@@ -197,7 +201,7 @@ public class Competition implements Comparable<Competition>, Serializable
 	public boolean remove(Candidat candidat)
 	{
 		candidat.remove(this);
-		Passerelle.delete(candidat);
+		//Passerelle.delete(candidat);
 		return candidats.remove(candidat);
 	}
 	
@@ -209,7 +213,7 @@ public class Competition implements Comparable<Competition>, Serializable
 	{
 		for (Candidat candidat : candidats)
 			candidat.remove(this);
-		Passerelle.delete(this);
+		//Passerelle.delete(this);
 		inscriptions.delete(this);	
 	}
 	

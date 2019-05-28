@@ -35,6 +35,8 @@ public class Equipe extends Candidat
 	{
 		super(inscriptions, nom);
 	}
+	
+    public Equipe() {}
 
 	/**
 	 * Retourne l'ensemble des personnes formant l'équipe.

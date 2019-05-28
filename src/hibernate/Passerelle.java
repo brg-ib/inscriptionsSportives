@@ -12,6 +12,8 @@ import org.hibernate.boot.registry.StandardServiceRegistryBuilder;
 import org.hibernate.cfg.Configuration;
 import org.hibernate.service.ServiceRegistry;
 
+import inscriptions.*;
+
 public class Passerelle
 {
 	private static Session session = null;
@@ -95,4 +97,36 @@ public class Passerelle
 				+ id);
 		return (T) (query.list().get(0));
 	}
+	
+	
+	@SuppressWarnings("unchecked")
+	public static java.util.List<Equipe> getEquipe()
+	{
+		Query query = session.createQuery("from Equipe");
+		return query.list();
+	}
+	
+	
+	@SuppressWarnings("unchecked")
+	public static java.util.List<Personne> getPersonne()
+	{
+		Query query = session.createQuery("from Personne");
+		return query.list();
+	}
+	
+	@SuppressWarnings("unchecked")
+	public static java.util.List<Candidat> getCandidat()
+	{
+		Query query = session.createQuery("from Candidat");
+		return query.list();
+	}
+	
+	@SuppressWarnings("unchecked")
+	public static java.util.List<Competition> getCompetition()
+	{
+		Query query = session.createQuery("from Competition");
+		return query.list();
+	}
+	
+	
 }

@@ -12,12 +12,12 @@
   
   <property name="hbm2ddl.auto">update</property>
   
-  <!-- property name="hibernate.show_sql">true</property -->
+  <property name="hibernate.show_sql">true</property>
   <property name="hibernate.use_outer_join">true</property>
   
   <property name="jta.UserTransaction">java:comp/UserTransaction</property>
   
-
+  <mapping class="inscriptions.Inscriptions" />
   <mapping class="inscriptions.Candidat" />
   <mapping class="inscriptions.Competition"/>
   <mapping class="inscriptions.Personne"/> 

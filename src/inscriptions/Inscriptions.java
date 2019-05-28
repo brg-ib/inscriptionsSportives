@@ -92,7 +92,7 @@ public class Inscriptions implements Serializable
 	{
 		Competition competition = new Competition(this, nom, date, enEquipe);
 		competitions.add(competition);
-		sauvegarder(competition);
+		//sauvegarder(competition);
 		return competition;
 	}
 
@@ -109,7 +109,7 @@ public class Inscriptions implements Serializable
 	{
 		Personne personne = new Personne(this, nom, prenom, mail);
 		candidats.add(personne);
-		sauvegarder(personne);
+		//sauvegarder(personne);
 		return personne;
 	}
 	
@@ -126,7 +126,7 @@ public class Inscriptions implements Serializable
 	{
 		Equipe equipe = new Equipe(this, nom);
 		candidats.add(equipe);
-		sauvegarder(equipe);
+		//sauvegarder(equipe);
 		return equipe;
 	}
 	
@@ -243,7 +243,10 @@ public class Inscriptions implements Serializable
 		}
 	}
 	
-	
+	/**
+	 * Sauvegarde l'objet via la passerelle
+	 * @param o
+	 */
 	public void sauvegarder(Object o) {
 		Passerelle.save(o);
 	}

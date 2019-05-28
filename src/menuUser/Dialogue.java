@@ -6,6 +6,8 @@ import java.time.LocalDate;
 import inscriptions.*;
 import java.util.ArrayList;
 
+import hibernate.Passerelle;
+
 import commandLineMenus.*;
 import commandLineMenus.rendering.examples.util.InOut;
 import static commandLineMenus.rendering.examples.util.InOut.*;
@@ -52,8 +54,10 @@ public class Dialogue {
 	}
 	
 	
-	
-	// Menus
+	/**
+	 * Menu de l'application
+	 * @return
+	 */
 	private Menu menuCompetitions()
 	{
 		Menu menu = new Menu("Gérer les compétitions", "c");
@@ -88,50 +92,75 @@ public class Dialogue {
 	}
 
 	
-	// Affichages
+	/**
+	 * Affiche les objets slectionnés
+	 * @return Option
+	 */
 	private Option afficherCompetitions()
 	{
-		return new Option("Afficher les compétitions", "l", () -> {System.out.println(inscriptions.getCompetitions());});
+		return new Option("Afficher les compétitions", "l", () -> {
+			for(Competition c : Passerelle.getCompetition()) {
+				System.out.println(c);
+			};
+		});
 	}
 	
 	private Option afficherEquipes()
 	{
-		return new Option("Afficher les équipes", "l", () -> {System.out.println(inscriptions.getEquipes());});
+		return new Option("Afficher les équipes", "l", () -> {
+			for(Equipe e : Passerelle.getEquipe()) {
+				System.out.println(e);
+			};
+		});
 	}
 	
 	private Option afficherPersonnes()
 	{
-		return new Option("Afficher les personnes", "l", () -> {System.out.println(inscriptions.getPersonnes());});
+		return new Option("Afficher les personnes", "l", () -> {
+			for(Personne p : Passerelle.getPersonne()) {
+				System.out.println(p);
+			};
+		});
 	}
 	
 	
-	// Ajouts
+	/**
+	 * Ajoute l'objet selectionné 
+	 * @return
+	 */
 	private Option ajouterCompetition()
 	{
-		return new Option("Ajouter une compétition", "a", () -> {inscriptions.createCompetition(getString("Entrez le nom de : "), 
+		return new Option("Ajouter une compétition", "a", () -> {
+			Passerelle.save(inscriptions.createCompetition(getString("Nom : "), 
 				LocalDate.of(getInt("Année : "), getInt("Mois : "), getInt("Jour : ")), 
-				  InOut.getInt("Choisir :\n0 - Compétition de personnes \n1 - Compétition d'équipes : ")==1);});
+				  InOut.getInt("Choisir :\n0 - Compétition de personnes \n1 - Compétition d'équipes : ")==1));
+		});
 	}
 	
 	private Option ajouterEquipe()
 	{
-		return new Option("Ajouter une équipe", "a", () -> {inscriptions.createEquipe(getString("Entrez le nom de votre équipe : "));});
+		return new Option("Ajouter une équipe", "a", () -> {
+			Passerelle.save(inscriptions.createEquipe(getString("Entrez le nom de votre équipe : ")));});
 	}
 	
 	private Option ajouterPersonne()
 	{
-		return new Option("Ajouter une personne", "a", () -> {inscriptions.createPersonne(getString("Entrez le nom de votre personne : "), 
-																						  getString("Entrez le prenom de votre personne : "), 
-																						  getString("Entrez le mail de votre personne : "));});
+		return new Option("Ajouter une personne", "a", () -> {
+			Passerelle.save(inscriptions.createPersonne(getString("Entrez le nom de votre personne : "), 
+														getString("Entrez le prenom de votre personne : "), 
+														getString("Entrez le mail de votre personne : ")));});
 	}
 
 	
 	
-	// Selections
+	/**
+	 * Selectionner l'objet concerné
+	 * @return
+	 */
 	private List<Competition> selectionnerCompetition()
 	{
 		return new List<Competition>("Sélectionner une compétition", "e", 
-				() -> new ArrayList<>(inscriptions.getCompetitions()),
+				() -> new ArrayList<>(Passerelle.getCompetition()),
 				(element) -> editerCompetition(element)
 				);
 	}
@@ -139,7 +168,7 @@ public class Dialogue {
 	private List<Equipe> selectionnerEquipe()
 	{
 		return new List<Equipe>("Sélectionner une équipe", "e", 
-				() -> new ArrayList<>(inscriptions.getEquipes()),
+				() -> new ArrayList<>(Passerelle.getEquipe()),
 				(element) -> editerEquipe(element)
 				);
 	}
@@ -147,7 +176,7 @@ public class Dialogue {
 	private List<Personne> selectionnerPersonne()
 	{
 		return new List<Personne>("Sélectionner une personne", "e", 
-				() -> new ArrayList<>(inscriptions.getPersonnes()),
+				() -> new ArrayList<>(Passerelle.getPersonne()),
 				(element) -> editerPersonne(element)
 				);
 	}
@@ -165,10 +194,14 @@ public class Dialogue {
         menu.add(afficherCandidats(competition));
         
         if(competition.inscriptionsOuvertes()) {
-        if (!competition.estEnEquipe())
-        	menu.add(ajouterPersonneCompetition(competition));
-        else
-        	menu.add(ajouterEquipeCompetition(competition)); 
+	        if (!competition.estEnEquipe()) {
+	        	menu.add(ajouterPersonneCompetition(competition));
+	        	//Passerelle.save(competition);
+	        }
+	        else {
+	        	menu.add(ajouterEquipeCompetition(competition)); 
+	        	//Passerelle.save(competition);
+	        }
         } 
         	
         menu.add(supprimerCandidat(competition));
@@ -184,10 +217,11 @@ public class Dialogue {
 	{
 		return new Option("Afficher la compétition", "lc", 
 				() -> 
-				{
-					System.out.println(competition.getNom());
-					System.out.println(competition.getDateCloture());
-					System.out.println(competition.estEnEquipe());
+				{	
+					System.out.println(competition.getNom()+" - "
+								+competition.getDateCloture()+" - "
+								+competition.estEnEquipe());
+					Passerelle.save(competition);
 				}
 		);
 	}
@@ -206,15 +240,15 @@ public class Dialogue {
 	{
 		return new List<>("Ajouter un candidat dans la compétition", "m", 
 				() -> new ArrayList<>(inscriptions.getPersonnes()),
-				(index, element) -> {competition.add((Personne) element);}
+				(index, element) -> {Passerelle.save(competition.add((Personne) element));}
 				);
 	}
 	
 	private List<Candidat> ajouterEquipeCompetition(final Competition competition)
 	{
 		return new List<>("Ajouter une équipe dans la compétition", "e", 
-				() -> new ArrayList<>(inscriptions.getEquipes()),
-				(index, element) -> {competition.add((Equipe) element);}
+				() -> new ArrayList<>(Passerelle.getEquipe()),
+				(index, element) -> {Passerelle.save(competition.add((Equipe) element));}
 				);
 	}
 	
@@ -222,7 +256,7 @@ public class Dialogue {
 	{
 		return new List<>("Supprimer un candidat", "s", 
 				() -> new ArrayList<>(competition.getCandidats()),
-				(index, element) -> {competition.remove(element);}
+				(index, element) -> {Passerelle.delete(competition.remove(element));}
 				);
 	}
 	
@@ -232,6 +266,7 @@ public class Dialogue {
 				() -> 
 				{
 					competition.setNom(getString("Nouveau nom : \n"));
+					Passerelle.save(competition);
 				}
 		);
 	}
@@ -239,8 +274,9 @@ public class Dialogue {
 	private Option modifierDateCompetition(final Competition competition)
 	{
 		return new Option("modifier la date de la compétition", "md", 
-				() -> 
-		{competition.setDateCloture(LocalDate.of(getInt("Année : "), getInt("Mois : "), getInt("Jour : ")));});
+				() -> {
+					competition.setDateCloture(LocalDate.of(getInt("Année : "), getInt("Mois : "), getInt("Jour : ")));
+					});
 	}
 	
 	private Option supprimerCompetition(final Competition competition)
@@ -249,14 +285,18 @@ public class Dialogue {
 				() -> 
 				{
 					competition.delete();
-					
+					Passerelle.delete(competition);;
 				}
 		);
 	}
 	
 
 	
-	// Selectionner : Equipe
+	/**
+	 * Menu Edition 
+	 * @param equipe
+	 * @return
+	 */
 	private Menu editerEquipe(Equipe equipe)
     {
         Menu menu = new Menu("Editer " + equipe.getNom());
@@ -283,8 +323,8 @@ public class Dialogue {
 	private List<Personne> ajouterMembre(final Equipe equipe)
 	{
 		return new List<>("Ajouter un membre", "m", 
-				() -> new ArrayList<>(inscriptions.getPersonnes()),
-				(index, element) -> {equipe.add(element);}
+				() -> new ArrayList<>(Passerelle.getPersonne()),
+				(index, element) -> {Passerelle.save(equipe.add(element));}
 				);
 	}
 	
@@ -292,7 +332,7 @@ public class Dialogue {
 	{
 		return new List<>("Supprimer un membre", "s", 
 				() -> new ArrayList<>(equipe.getMembres()),
-				(index, element) -> {equipe.remove(element);}
+				(index, element) -> {Passerelle.delete(equipe.remove(element));}
 				);
 	}
 	
@@ -302,6 +342,7 @@ public class Dialogue {
 				() -> 
 				{
 					equipe.delete();
+					Passerelle.delete(equipe);
 				}
 		);
 	}
@@ -327,13 +368,16 @@ public class Dialogue {
 			personne.setNom(getString("Nouveau nom : "));
 			personne.setPrenom(getString("Nouveau prenom : "));
 			personne.setMail(getString("Nouveau mail : "));
+			Passerelle.save(personne);
 			
 		});
 	}
 	
 	private Option supprimerPersonne(Personne personne)
 	{
-		return new Option("Supprimer la personne", "b", () -> {personne.delete();});
+		return new Option("Supprimer la personne", "b", () -> {personne.delete();
+		Passerelle.delete(personne);
+		});
 	}
 	
 

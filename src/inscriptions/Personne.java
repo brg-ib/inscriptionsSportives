@@ -12,7 +12,6 @@ import hibernate.Passerelle;
 
 @Entity
 @Table(name="personne")
-
 public class Personne extends Candidat
 {
 
@@ -37,6 +36,13 @@ public class Personne extends Candidat
         @JoinColumn(name = "id_ca")}, inverseJoinColumns = {
         @JoinColumn(name = "id_eq")})
 	private Set<Equipe> equipes;
+	
+    
+    
+
+	@SuppressWarnings("unused")
+	Personne(){}
+	
 	
     /**
      * Constructeur
@@ -107,14 +113,14 @@ public class Personne extends Candidat
 	boolean add(Equipe equipe)
 	{
 		equipes.add(equipe);
-		Passerelle.save(equipe);
+		//Passerelle.save(equipe);
 		return equipes.add(equipe);
 	}
 
 	boolean remove(Equipe equipe)
 	{
 		equipes.remove(equipe);
-		Passerelle.save(equipe);
+		//Passerelle.save(equipe);
 		return equipes.remove(equipe);
 	}
 	
