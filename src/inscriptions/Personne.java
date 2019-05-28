@@ -4,8 +4,6 @@ import java.util.*;
 
 import javax.persistence.*;
 
-import hibernate.Passerelle;
-
 /**
  * Représente une personne physique pouvant s'inscrire à une compétition.
  */
@@ -37,10 +35,7 @@ public class Personne extends Candidat
         @JoinColumn(name = "id_eq")})
 	private Set<Equipe> equipes;
 	
-    
-    
-
-	@SuppressWarnings("unused")
+     
 	Personne(){}
 	
 	

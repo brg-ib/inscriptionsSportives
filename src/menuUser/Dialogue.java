@@ -207,6 +207,7 @@ public class Dialogue {
         menu.add(supprimerCandidat(competition));
         menu.add(modifierNomCompetition(competition));
         menu.add(modifierDateCompetition(competition));
+        menu.add(modifierEnEquipe(competition));
         menu.add(supprimerCompetition(competition));
         menu.add(sauvegarder());
         menu.addBack("q");
@@ -240,15 +241,16 @@ public class Dialogue {
 	{
 		return new List<>("Ajouter un candidat dans la compétition", "m", 
 				() -> new ArrayList<>(inscriptions.getPersonnes()),
-				(index, element) -> {Passerelle.save(competition.add((Personne) element));}
+				(index, element) -> {competition.add((Personne) element);}
 				);
 	}
 	
 	private List<Candidat> ajouterEquipeCompetition(final Competition competition)
 	{
 		return new List<>("Ajouter une équipe dans la compétition", "e", 
-				() -> new ArrayList<>(Passerelle.getEquipe()),
-				(index, element) -> {Passerelle.save(competition.add((Equipe) element));}
+				() -> new ArrayList<>(inscriptions.getEquipes()),
+				(index, element) -> {competition.add((Equipe) element);
+				}
 				);
 	}
 	
@@ -256,7 +258,7 @@ public class Dialogue {
 	{
 		return new List<>("Supprimer un candidat", "s", 
 				() -> new ArrayList<>(competition.getCandidats()),
-				(index, element) -> {Passerelle.delete(competition.remove(element));}
+				(index, element) -> {competition.remove(element);}
 				);
 	}
 	
@@ -290,7 +292,32 @@ public class Dialogue {
 		);
 	}
 	
-
+	
+	/**
+	 * Fonction a definir
+	 * @param competition
+	 * @return
+	 */
+	private Option modifierEnEquipe(final Competition competition)
+	{
+		return new Option("Modifier l'état de l'equipe", "me", 
+				() -> {
+						if(!competition.getCandidats().isEmpty()) {
+							 int a = getInt("Voulez-vous supprimer tous les candidats ?");
+							 if(a == 1) {
+								 competition.remove();
+								 competition.setEstEnEquipe(!competition.estEnEquipe());
+								 
+							 }
+						}else {
+							competition.setEstEnEquipe(!competition.estEnEquipe());
+						}
+							
+				});
+		
+	}
+			
+	
 	
 	/**
 	 * Menu Edition 
@@ -349,8 +376,11 @@ public class Dialogue {
 	
 	
 	
-	// Selectionner : Personne
-	
+	/**
+	 * Edition
+	 * @param personne
+	 * @return
+	 */
 	private Menu editerPersonne(Personne personne)
 	{
 	    Menu menu = new Menu("Editer " + personne.getNom());

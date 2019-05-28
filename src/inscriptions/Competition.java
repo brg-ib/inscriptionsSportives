@@ -7,9 +7,9 @@ import java.util.Set;
 import java.util.TreeSet;
 import javax.persistence.*;
 
-import inscriptions.Inscriptions;
+import menuUser.Dialogue;
 
-import hibernate.Passerelle;
+import inscriptions.Inscriptions;
 
 /**
  * Couche métier des compétitions;
@@ -117,6 +117,23 @@ public class Competition implements Comparable<Competition>, Serializable
 	}
 	
 	/**
+	 * 
+	 * @param enEquipe
+	 */
+	public void setEstEnEquipe(boolean enEquipe) {
+		if(getCandidats().isEmpty())
+			this.enEquipe = enEquipe;
+		else
+			
+			throw new RuntimeException("Erreur set En equipe: ");
+			
+	}
+	
+	
+
+		
+	
+	/**
 	 * Modifie la date de cloture des inscriptions. Il est possible de la reculer 
 	 * mais pas de l'avancer.
 	 * @param dateCloture
@@ -205,6 +222,10 @@ public class Competition implements Comparable<Competition>, Serializable
 		return candidats.remove(candidat);
 	}
 	
+	public void remove() {
+		while(!getCandidats().isEmpty())
+			remove(getCandidats().iterator().next());
+	}
 	/**
 	 * Supprime la competition de l'application.
 	 */
