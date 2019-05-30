@@ -2,8 +2,20 @@ package hibernate;
 
 import menuUser.Dialogue;
 
+
+/**
+ ******* Classe principale *****
+ ******************************* 
+ * @author Ihcen
+ *
+ */
 public class mainApp{ 
 	
+	/**
+	 * Methode principale
+	 * Point d'entree
+	 * @param args
+	 */
 	public static void main(String[] args) {
 	Passerelle.open();
 	
@@ -13,12 +25,4 @@ public class mainApp{
 	System.out.println("Application fermée.");
 	}
 
-	/**
-	 * Tache à finir Hibernate;
-	 * Ajouter personne(membre) dans une equipe
-	 * Ajouter candidat à une competition
-	 *
-	 * 
-	 * 
-	 */
 }
