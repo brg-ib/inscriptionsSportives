@@ -13,9 +13,10 @@ import static commandLineMenus.rendering.examples.util.InOut.*;
 
 
 /**
- * Dialogue utilisateur 
- * CommandLine
- * 
+ **** Dialogue utilisateur *****
+ ******************************* 
+ * Couche : dialogue
+ * @author Ihcen
  *
  */
 public class Dialogue {
@@ -23,18 +24,28 @@ public class Dialogue {
 	
 	static Inscriptions inscriptions;
 	
-
+	/**
+	 * Dialogue
+	 * @param inscriptions
+	 */
 	public Dialogue(Inscriptions inscriptions)
 	{
 		Dialogue.inscriptions = inscriptions;
 		start();
 	}
 	
+	/**
+	 * Start
+	 */
 	public void start()
 	{
 		menuPrincipal().start();
 	}
 	
+	/**
+	 * Menu principal
+	 * @return
+	 */
 	private Menu menuPrincipal()
 	{
 		Menu menu = new Menu("Gestion des inscriptions sportives");
@@ -44,7 +55,11 @@ public class Dialogue {
 		menu.add(menuQuitter());
 		return menu;
 	}
-
+	
+	/**
+	 * Menu Quitter
+	 * @return
+	 */
 	private Menu menuQuitter()
 	{
 		Menu menu = new Menu("Quitter", "q");
@@ -54,9 +69,8 @@ public class Dialogue {
 		return menu;
 	}
 	
-	
 	/**
-	 * Menu de l'application
+	 * Menu Competition
 	 * @return
 	 */
 	private Menu menuCompetitions()
@@ -70,6 +84,10 @@ public class Dialogue {
 		return menu;
 	}
 	
+	/**
+	 * Menu Equipe
+	 * @return
+	 */
 	private Menu menuEquipes()
 	{
 		Menu menu = new Menu("Gérer les équipes", "e");
@@ -81,6 +99,10 @@ public class Dialogue {
 		return menu;
 	}
 	
+	/**
+	 * Menu Personne
+	 * @return
+	 */
 	private Menu menuPersonnes()
 	{
 		Menu menu = new Menu("Gérer les personnes", "p");
@@ -91,10 +113,9 @@ public class Dialogue {
 		menu.addBack("q");
 		return menu;
 	}
-
 	
 	/**
-	 * Affiche les objets slectionnés
+	 * Affiche les competitions
 	 * @return Option
 	 */
 	private Option afficherCompetitions()
@@ -106,6 +127,10 @@ public class Dialogue {
 		});
 	}
 	
+	/**
+	 * Afficher les equipes
+	 * @return
+	 */
 	private Option afficherEquipes()
 	{
 		return new Option("Afficher les équipes", "l", () -> {
@@ -115,6 +140,10 @@ public class Dialogue {
 		});
 	}
 	
+	/**
+	 * Afficher les personnes
+	 * @return
+	 */
 	private Option afficherPersonnes()
 	{
 		return new Option("Afficher les personnes", "l", () -> {
@@ -124,9 +153,8 @@ public class Dialogue {
 		});
 	}
 	
-	
 	/**
-	 * Ajoute l'objet selectionné 
+	 * Ajouter une competition 
 	 * @return
 	 */
 	private Option ajouterCompetition()
@@ -138,12 +166,20 @@ public class Dialogue {
 		});
 	}
 	
+	/**
+	 * Ajouter une equipe 
+	 * @return
+	 */
 	private Option ajouterEquipe()
 	{
 		return new Option("Ajouter une équipe", "a", () -> {
 			Passerelle.save(inscriptions.createEquipe(getString("Entrez le nom de votre équipe : ")));});
 	}
-	
+
+	/**
+	 * Ajouter une personne 
+	 * @return
+	 */
 	private Option ajouterPersonne()
 	{
 		return new Option("Ajouter une personne", "a", () -> {
@@ -152,10 +188,8 @@ public class Dialogue {
 														getString("Entrez le mail de votre personne : ")));});
 	}
 
-	
-	
 	/**
-	 * Selectionner l'objet concerné
+	 * Sélectionner une compétition
 	 * @return
 	 */
 	private List<Competition> selectionnerCompetition()
@@ -166,6 +200,10 @@ public class Dialogue {
 				);
 	}
 	
+	/**
+	 * Sélectionner une equipe
+	 * @return
+	 */
 	private List<Equipe> selectionnerEquipe()
 	{
 		return new List<Equipe>("Sélectionner une équipe", "e", 
@@ -174,6 +212,10 @@ public class Dialogue {
 				);
 	}
 	
+	/**
+	 * Sélectionner une personne
+	 * @return
+	 */
 	private List<Personne> selectionnerPersonne()
 	{
 		return new List<Personne>("Sélectionner une personne", "e", 
@@ -182,9 +224,8 @@ public class Dialogue {
 				);
 	}
 	
-	
 	/**
-	 * 
+	 * Menu Edition competition
 	 * @param competition
 	 * @return
 	 */
@@ -197,11 +238,9 @@ public class Dialogue {
         if(competition.inscriptionsOuvertes()) {
 	        if (!competition.estEnEquipe()) {
 	        	menu.add(ajouterPersonneCompetition(competition));
-	        	//Passerelle.save(competition);
 	        }
 	        else {
 	        	menu.add(ajouterEquipeCompetition(competition)); 
-	        	//Passerelle.save(competition);
 	        }
         } 
         	
@@ -215,6 +254,11 @@ public class Dialogue {
         return menu;
     }
 	
+	/**
+	 * Afficher les details de la competition sélectionnée
+	 * @param competition
+	 * @return
+	 */
 	private Option afficherCompetition(final Competition competition)
 	{
 		return new Option("Afficher la compétition", "lc", 
@@ -223,11 +267,16 @@ public class Dialogue {
 					System.out.println(competition.getNom()+" - "
 								+competition.getDateCloture()+" - "
 								+competition.estEnEquipe());
-					Passerelle.save(competition);
+					//Passerelle.save(competition);
 				}
 		);
 	}
 	
+	/**
+	 * Afficher les candidats de la compétition
+	 * @param competition
+	 * @return
+	 */
 	private Option afficherCandidats(final Competition competition)
 	{
 		return new Option("Afficher les candidats", "a", 
@@ -238,6 +287,11 @@ public class Dialogue {
 		);
 	}
 	
+	/**
+	 * Ajouter une personne dans la compétition
+	 * @param competition
+	 * @return
+	 */
 	private List<Candidat> ajouterPersonneCompetition(final Competition competition)
 	{
 		return new List<>("Ajouter un candidat dans la compétition", "m", 
@@ -246,6 +300,11 @@ public class Dialogue {
 				);
 	}
 	
+	/**
+	 * Ajouter une equipe dans la compétition
+	 * @param competition
+	 * @return
+	 */
 	private List<Candidat> ajouterEquipeCompetition(final Competition competition)
 	{
 		return new List<>("Ajouter une équipe dans la compétition", "e", 
@@ -255,6 +314,11 @@ public class Dialogue {
 				);
 	}
 	
+	/**
+	 * Supprimer un candidat de la compétition
+	 * @param competition
+	 * @return
+	 */
 	private List<Candidat> supprimerCandidat(final Competition competition)
 	{
 		return new List<>("Supprimer un candidat", "s", 
@@ -263,6 +327,11 @@ public class Dialogue {
 				);
 	}
 	
+	/**
+	 * Modifier le nom de la compétition
+	 * @param competition
+	 * @return
+	 */
 	private Option modifierNomCompetition(final Competition competition)
 	{
 		return new Option("modifier le nom de la compétition", "c", 
@@ -274,6 +343,11 @@ public class Dialogue {
 		);
 	}
 	
+	/**
+	 * Modifier la date de la compétition
+	 * @param competition
+	 * @return
+	 */
 	private Option modifierDateCompetition(final Competition competition)
 	{
 		return new Option("modifier la date de la compétition", "md", 
@@ -282,6 +356,11 @@ public class Dialogue {
 					});
 	}
 	
+	/**
+	 * Supprimer une compétition
+	 * @param competition
+	 * @return
+	 */
 	private Option supprimerCompetition(final Competition competition)
 	{
 		return new Option("Supprimer la compétition", "d", 
@@ -293,9 +372,8 @@ public class Dialogue {
 		);
 	}
 	
-	
 	/**
-	 * Fonction a definir
+	 * Modifier l'état en Equipe de la compétition
 	 * @param competition
 	 * @return
 	 */
@@ -304,7 +382,9 @@ public class Dialogue {
 		return new Option("Modifier l'état de l'equipe", "me", 
 				() -> {
 						if(!competition.getCandidats().isEmpty()) {
-							 int a = getInt("Voulez-vous supprimer tous les candidats ?");
+							 int a = getInt("Voulez-vous supprimer tous les candidats ?\n"
+									 +"0 - Non\n"
+									 +"1 - Oui\n");
 							 if(a == 1) {
 								 competition.remove();
 								 competition.setEstEnEquipe(!competition.estEnEquipe());
@@ -318,10 +398,8 @@ public class Dialogue {
 		
 	}
 			
-	
-	
 	/**
-	 * Menu Edition 
+	 * Menu Edition Equipe
 	 * @param equipe
 	 * @return
 	 */
@@ -337,7 +415,11 @@ public class Dialogue {
         return menu;
     }
 	
-	
+	/**
+	 * Afficher les membres de l'équipe
+	 * @param equipe
+	 * @return
+	 */
 	private Option afficherMembres(final Equipe equipe)
 	{
 		return new Option("Afficher les membres", "a", 
@@ -348,6 +430,11 @@ public class Dialogue {
 		);
 	}
 	
+	/**
+	 * Ajouter un membre dans l'équipe
+	 * @param equipe
+	 * @return
+	 */
 	private List<Personne> ajouterMembre(final Equipe equipe)
 	{
 		return new List<>("Ajouter un membre", "m", 
@@ -358,6 +445,11 @@ public class Dialogue {
 				);
 	}
 	
+	/**
+	 * Supprimer un membre de l'équipe
+	 * @param equipe
+	 * @return
+	 */
 	private List<Personne> supprimerMembre(final Equipe equipe)
 	{
 		return new List<>("Supprimer un membre", "s", 
@@ -368,6 +460,11 @@ public class Dialogue {
 				);
 	}
 	
+	/**
+	 * Supprimer une équipe
+	 * @param equipe
+	 * @return
+	 */
 	private Option supprimerEquipe(final Equipe equipe)
 	{
 		return new Option("Supprimer l'équipe", "d", 
@@ -377,12 +474,10 @@ public class Dialogue {
 					Passerelle.delete(equipe);
 				}
 		);
-	}
-	
-	
+	}	
 	
 	/**
-	 * Edition
+	 * Edition de Personne
 	 * @param personne
 	 * @return
 	 */
@@ -396,6 +491,11 @@ public class Dialogue {
 	    return menu;
 	}
 	
+	/**
+	 * Modifier une personne (nom, prénom, mail)
+	 * @param personne
+	 * @return
+	 */
 	private Option modifierPersonne(Personne personne)
 	{
 		return new Option("Modifier une personne", "a", () -> {
@@ -408,6 +508,11 @@ public class Dialogue {
 		});
 	}
 	
+	/**
+	 * Supprimer une personne 
+	 * @param personne
+	 * @return
+	 */
 	private Option supprimerPersonne(Personne personne)
 	{
 		return new Option("Supprimer la personne", "b", () -> {personne.delete();
@@ -415,16 +520,13 @@ public class Dialogue {
 		});
 	}
 	
-
-	
-	
-	// Quitter
-	
-	
-	
+	/**
+	 * Quitter le dialogue et enregistrer les données dans Inscriptions.srz
+	 * @return
+	 */
 	private Option quitterEtEnregistrer()
     {
-        return new Option("Quitter et enregistrer", "q", 
+        return new Option("Quitter et sauvegarder", "q", 
                 () -> 
                 {
                     try
@@ -440,14 +542,17 @@ public class Dialogue {
             );
     }
 	
+	/**
+	 * Quitter le dialogue sans sauvegarder les données 
+	 * @return
+	 */
 	private Option quitterSansEnregistrer()
 	{
-		return new Option("Quitter sans enregistrer", "a", Action.QUIT);
+		return new Option("Quitter sans sauvegarder", "a", Action.QUIT);
 	}
 	
-
 	/**
-	 * Sauvegarder 
+	 * Sauvegarder les données dans Inscriptions.srz
 	 * @return
 	 */
 	private Option sauvegarder()
@@ -470,6 +575,9 @@ public class Dialogue {
             );
     }
 	
+	/**
+	 * Fonction Main
+	 */
 	public static void main() {
 		new Dialogue(Inscriptions.getInscriptions());
 	}

@@ -14,6 +14,14 @@ import org.hibernate.service.ServiceRegistry;
 
 import inscriptions.*;
 
+
+/**
+ **** Passerelle Hibernate *****
+ ******************************* 
+ * Couche : Persistance
+ * @author Ihcen
+ *
+ */
 public class Passerelle
 {
 	private static Session session = null;
@@ -21,6 +29,9 @@ public class Passerelle
 	private static final String CONF_FILE = "hibernate/config.cfg.xml";
 	private static Transaction transaction = null;
 	
+	/**
+	 * Initialisation Hibernate
+	 */
 	static void initHibernate()
 	{
 		try
@@ -38,6 +49,9 @@ public class Passerelle
 		}		
 	}
 	
+	/**
+	 * Ouverture de la connexion
+	 */
 	public static void open()
 	{
 		if (sessionFactory == null)
@@ -46,17 +60,29 @@ public class Passerelle
 			session = sessionFactory.openSession();
 	}
 
+	/**
+	 * Test si la connexion est ouverte
+	 * @return boolean
+	 * 			
+	 */
 	public static boolean isOpened()
 	{
 		return session != null && session.isOpen();
 	}
 	
+	/**
+	 * Fermeture de la connexion
+	 */
 	public static void close()
 	{
 		if (isOpened())
 			session.close();
 	}
-
+	
+	/**
+	 * Supprimer l'élément
+	 * @param o
+	 */
 	public static void delete(Object o)
 	{
 		transaction = session.beginTransaction();
@@ -66,6 +92,10 @@ public class Passerelle
 		session.flush();
 	}
 
+	/**
+	 * Sauvegarder l'élément
+	 * @param o
+	 */
 	public static void save(Object o)
 	{
 		Transaction tx = session.beginTransaction();
@@ -74,6 +104,12 @@ public class Passerelle
 		session.flush();
 	}
 
+	/**
+	 * Récuperation des éléments
+	 * @param <T>
+	 * @param className
+	 * @return
+	 */
 	@SuppressWarnings("unchecked")
 	public static <T> List<T> getData(String className)
 	{
@@ -81,6 +117,13 @@ public class Passerelle
 		return new ArrayList<T>((List<T>) query.list());
 	}
 
+	/**
+	 * Récuperation des éléments
+	 * @param <T>
+	 * @param className
+	 * @param id
+	 * @return
+	 */
 	@SuppressWarnings("unchecked")
 	public static <T> T getData(String className, int id)
 	{
@@ -89,6 +132,10 @@ public class Passerelle
 	}
 	
 	
+	/**
+	 * Récuperation des équipes
+	 * @return
+	 */
 	@SuppressWarnings("unchecked")
 	public static java.util.List<Equipe> getEquipe()
 	{
@@ -96,7 +143,10 @@ public class Passerelle
 		return query.list();
 	}
 	
-	
+	/**
+	 * Récuperation des personnes
+	 * @return
+	 */
 	@SuppressWarnings("unchecked")
 	public static java.util.List<Personne> getPersonne()
 	{
@@ -104,6 +154,10 @@ public class Passerelle
 		return query.list();
 	}
 	
+	/**
+	 * Récuperation des candidats
+	 * @return
+	 */
 	@SuppressWarnings("unchecked")
 	public static java.util.List<Candidat> getCandidat()
 	{
@@ -111,6 +165,10 @@ public class Passerelle
 		return query.list();
 	}
 	
+	/**
+	 * Récuperation des compétitions
+	 * @return
+	 */
 	@SuppressWarnings("unchecked")
 	public static java.util.List<Competition> getCompetition()
 	{
