@@ -7,7 +7,6 @@ import inscriptions.*;
 import java.util.ArrayList;
 
 import hibernate.Passerelle;
-
 import commandLineMenus.*;
 import commandLineMenus.rendering.examples.util.InOut;
 import static commandLineMenus.rendering.examples.util.InOut.*;
@@ -22,11 +21,13 @@ import static commandLineMenus.rendering.examples.util.InOut.*;
 public class Dialogue {
 	
 	
-	private Inscriptions inscriptions;
+	static Inscriptions inscriptions;
 	
+
 	public Dialogue(Inscriptions inscriptions)
 	{
-		this.inscriptions = inscriptions;
+		Dialogue.inscriptions = inscriptions;
+		start();
 	}
 	
 	public void start()
@@ -351,7 +352,9 @@ public class Dialogue {
 	{
 		return new List<>("Ajouter un membre", "m", 
 				() -> new ArrayList<>(Passerelle.getPersonne()),
-				(index, element) -> {Passerelle.save(equipe.add(element));}
+				(index, element) -> {equipe.add(element);
+				//Passerelle.save(equipe);
+				}
 				);
 	}
 	
@@ -359,7 +362,9 @@ public class Dialogue {
 	{
 		return new List<>("Supprimer un membre", "s", 
 				() -> new ArrayList<>(equipe.getMembres()),
-				(index, element) -> {Passerelle.delete(equipe.remove(element));}
+				(index, element) -> {equipe.remove(element);
+				//Passerelle.delete(equipe);
+				}
 				);
 	}
 	
@@ -465,6 +470,8 @@ public class Dialogue {
             );
     }
 	
-	
-	
+	public static void main() {
+		new Dialogue(Inscriptions.getInscriptions());
+	}
+		
 }
