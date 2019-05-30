@@ -20,7 +20,7 @@ public class Passerelle
 	private static SessionFactory sessionFactory = null;
 	private static final String CONF_FILE = "hibernate/config.cfg.xml";
 	private static Transaction transaction = null;
-
+	
 	static void initHibernate()
 	{
 		try
@@ -37,7 +37,6 @@ public class Passerelle
 					+ ex.getMessage(), ex);
 		}		
 	}
-	
 	
 	public static void open()
 	{
@@ -63,22 +62,14 @@ public class Passerelle
 		transaction = session.beginTransaction();
 		session.delete(o);
 		transaction.commit();
-		transaction = null;
+		transaction = null; 
 		session.flush();
 	}
-	
+
 	public static void save(Object o)
 	{
 		Transaction tx = session.beginTransaction();
 		session.save(o);
-		tx.commit();
-		session.flush();
-	}
-	
-	public static void update(Object o)
-	{
-		Transaction tx = session.beginTransaction();
-		session.update(o);
 		tx.commit();
 		session.flush();
 	}
@@ -93,8 +84,7 @@ public class Passerelle
 	@SuppressWarnings("unchecked")
 	public static <T> T getData(String className, int id)
 	{
-		Query query = session.createQuery("from " + className + " where num = "
-				+ id);
+		Query query = session.createQuery("from " + className + " where num = "+ id);
 		return (T) (query.list().get(0));
 	}
 	
@@ -127,6 +117,5 @@ public class Passerelle
 		Query query = session.createQuery("from Competition");
 		return query.list();
 	}
-	
 	
 }

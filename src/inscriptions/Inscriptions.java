@@ -5,7 +5,7 @@ import java.util.*;
 
 import java.time.LocalDate;
 
-import hibernate.Passerelle;;
+import hibernate.Passerelle;
 
 /**
  * Point d'entrée dans l'application, un seul objet de type Inscription
@@ -166,6 +166,7 @@ public class Inscriptions implements Serializable
 		}
 		return inscriptions;
 	}
+	
 
 	/**
 	 * Retourne un object inscriptions vide. Ne modifie pas les compétitions

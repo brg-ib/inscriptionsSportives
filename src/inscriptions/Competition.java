@@ -7,8 +7,6 @@ import java.util.Set;
 import java.util.TreeSet;
 import javax.persistence.*;
 
-import menuUser.Dialogue;
-
 import inscriptions.Inscriptions;
 
 /**
@@ -52,8 +50,6 @@ public class Competition implements Comparable<Competition>, Serializable
 	@Column(name="en_equipe")
 	private boolean enEquipe = false;
 
-	
-	@SuppressWarnings("unused")
 	Competition(){}
 	
 	Competition(Inscriptions inscriptions, String nom, LocalDate dateCloture, boolean enEquipe)
@@ -129,9 +125,6 @@ public class Competition implements Comparable<Competition>, Serializable
 			
 	}
 	
-	
-
-		
 	
 	/**
 	 * Modifie la date de cloture des inscriptions. Il est possible de la reculer 
@@ -226,6 +219,7 @@ public class Competition implements Comparable<Competition>, Serializable
 		while(!getCandidats().isEmpty())
 			remove(getCandidats().iterator().next());
 	}
+	
 	/**
 	 * Supprime la competition de l'application.
 	 */

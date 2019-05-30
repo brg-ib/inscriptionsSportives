@@ -1,19 +1,24 @@
 package hibernate;
 
-import inscriptions.Inscriptions;
 import menuUser.Dialogue;
-import hibernate.Passerelle;
 
-public class Main{ 
+public class mainApp{ 
 	
 	public static void main(String[] args) {
-		Passerelle.initHibernate();
-		Passerelle.open();
-		
-	    Inscriptions inscriptions = Inscriptions.getInscriptions();
-	    Dialogue dial = new Dialogue(inscriptions);
-	    dial.start();
-	    
-	    Passerelle.close();
+	Passerelle.open();
+	
+	Dialogue.main();    
+	
+	Passerelle.close();
+	System.out.println("Application fermée.");
 	}
+
+	/**
+	 * Tache à finir Hibernate;
+	 * Ajouter personne(membre) dans une equipe
+	 * Ajouter candidat à une competition
+	 *
+	 * 
+	 * 
+	 */
 }

@@ -7,7 +7,6 @@ import java.util.TreeSet;
 
 import javax.persistence.*;
 
-import hibernate.Passerelle;
 /**
  * Candidat à un événement sportif, soit une personne physique, soit une équipe.
  *
@@ -108,7 +107,6 @@ public abstract class Candidat implements Comparable<Candidat>, Serializable
 		for (Competition c : competitions)
 			c.remove(this);
 		//inscriptions.delete(this);
-		Passerelle.delete(this);
 	}
 	
 	@Override
