@@ -148,7 +148,6 @@ public class Competition implements Comparable<Competition>, Serializable
 	
 	public Set<Candidat> getCandidats()
 	{
-		//Passerelle.getData("candidat");
 		return Collections.unmodifiableSet(candidats);
 	}
 	

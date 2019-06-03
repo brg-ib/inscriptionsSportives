@@ -31,7 +31,7 @@ public class Equipe extends Candidat
     @OrderBy("id_ca ASC")
 	private SortedSet<Personne> membres = new TreeSet<>();
 	
-	Equipe(Inscriptions inscriptions, String nom)
+	public Equipe(Inscriptions inscriptions, String nom)
 	{
 		super(inscriptions, nom);
 	}
@@ -90,7 +90,7 @@ public class Equipe extends Candidat
 	{
 		super.delete();
 	}
-	
+		
 	@Override
 	public String toString()
 	{
