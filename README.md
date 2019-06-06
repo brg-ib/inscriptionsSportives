@@ -9,6 +9,9 @@
 ## Mise en situation 
 Cette situation professionnelle est réalisée dans le contexte de la M2L, ou la maison des ligues de Lorraine. Sa mission est de fournir aux ligues sportives différents services. De plus, elle gère l’organisation de compétitions et ainsi la gestion des équipes et des personnes y participant. 
 
+## Intitulé de la situation professionnelle
+Création d’une application de gestion d’inscriptions aux événements sportifs.
+
 ## Technologie 
 
 inscriptionsSportives est un projet java qui a été imposé comme base de départ pour notre projet.
